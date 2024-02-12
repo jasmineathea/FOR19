@@ -33,6 +33,7 @@ p {
 /* Section developers */
 .section_developers {
   background-color:#d8cdc3;
+  padding-top: 60px;
 }
 .developers {
   display: grid;  
