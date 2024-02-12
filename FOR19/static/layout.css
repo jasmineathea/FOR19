@@ -1,0 +1,134 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap'); */
+/* New font */
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans&display=swap');
+
+
+/* CSS utilities */
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Albert Sans', sans-serif;
+  background: #fff;
+  line-height: 1.6;
+}
+.container {
+  margin: auto;
+  max-width: 1320px;
+}
+ul { 
+  /* list-style: none; */
+  text-align: left;
+  font-size: 400;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+h1, h2 {
+  font-weight: 400;
+  line-height: 1.2;
+}
+p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+img {
+  width: 100%;
+}
+/* Navbar  */
+.section_carbon_app_navbar {
+  background-color:#6c8c75;
+}
+.carbon_app_navbar {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-start; */
+  justify-content: space-between;
+  height: 70px;
+  align-items: center;
+  background-color:#6c8c75;
+  padding: 0 0px;
+}
+.carbon_app_navbar a {
+  color: #d8cdc3;
+  padding: 30px 30px;
+  font-size: 20px;
+  text-decoration: none;
+  align-items: center;
+}
+.carbon_app_navbar a:hover{
+  color: #d8cdc3;
+  background-color: #4e6454;
+  border-bottom: #d8cdc3 3px solid;
+}
+.carbon_app_navbar ul {
+  display: flex;
+  flex-direction: row;
+}
+.carbon_app_navbar .logo {
+  font-weight: 400;
+}
+.text-logo {
+  color: #314736;
+}
+/* Footer */
+.section_footer{
+  background-color:#90a897;
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 70px;
+  align-items: center;
+  background-color: #90a897;
+  padding: 0 0px;
+}
+
+/* Buttons for headers on every page */
+.section_container_buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap:wrap;
+  padding: 0px 0px;
+  margin: 0px 0px;
+}
+
+.btn_header {
+  padding: 10px 10px;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 22px;
+  background-color: #314736;
+}
+.btn_header:hover {
+  background-color: #4b6551;
+  color: #d8cdc3;
+  text-decoration: none;
+}
+
+/* Media query */
+@media(max-width:768px){
+  .carbon_app_navbar {
+    height: 160px;
+    flex-direction: column;
+  }
+  .carbon_app_navbar a {
+    font-size: 15px;
+    padding: 5px 20px;
+  }
+  .carbon_app_navbar ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .carbon_app_navbar a:hover{
+    color: #568c63;
+    /* border-bottom: #d8cdc3 2px solid; */
+  }
+}

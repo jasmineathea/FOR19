@@ -1,0 +1,145 @@
+/* Utilities  */
+p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+/* Section header_home */
+.section_header_home {
+  background-color:#90a897;
+}
+.header_home {
+  display: flex;  
+  align-items: start;
+  background: #90a897;
+}
+.header_home .box {
+  flex: 1;
+  background: #90a897;
+  color: #fff;
+  border-radius: 10px;
+  margin: 20px 10px;
+  padding: 15px 20px;
+  text-align:center;
+  align-items: center;
+  justify-content: center;
+}
+.header_home .box:nth-of-type(1) {
+  flex-grow:2;
+}
+.header_home .box:nth-of-type(2) {
+  flex-grow:1;
+}
+
+/* Section developers */
+.section_developers {
+  background-color:#d8cdc3;
+}
+.developers {
+  display: grid;  
+  /* grid-gap: 10px; */
+  justify-content: center; 
+  align-items: start;
+  background: #d8cdc3;
+}
+.developers .box {
+  flex: 1;
+  background: #968a7f;
+  color: white;
+  border-radius: 10px;
+  margin: 20px 10px;
+  padding: 15px 20px;
+  text-align:center;
+  align-items: center;
+  justify-content: center;
+}
+.developers .box:nth-of-type(1) {
+  flex-grow:4;
+}
+.developers .box:nth-of-type(2) {
+  flex-grow:4;
+}
+.developers .box:nth-of-type(3) {
+  flex-grow:4;
+}
+
+/* .developers .box2 {
+  flex: 1;
+  background: #49736f;
+  color: black;
+  border-radius: 10px;
+  margin: 20px 10px;
+  padding: 15px 20px;
+  text-align:center;
+  align-items: center;
+  justify-content: center;
+}
+.developers .box2:nth-of-type(1) {
+  flex-grow:4;
+}
+.developers .box2:nth-of-type(2) {
+  flex-grow:4;
+}
+.developers .box2:nth-of-type(3) {
+  flex-grow:4;
+  background: #c5c8d9;
+} */
+.section_container_buttons_developers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap:wrap;
+  padding: 0px 0px;
+  margin: 0px 0px;
+}
+.btn_developers {
+  padding: 10px 10px;
+  margin: 10px 10px 10px 10px;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 18px;
+  background-color: #695747;
+}
+.btn_developers:hover {
+  color: #695747;
+  background-color: #d8cdc3;
+  text-decoration: none;
+}
+
+/* Make sections screen responsive */
+/* Default to 2 developer-columns on small screens */
+@media (max-width: 600px) {
+  .header_home {
+    flex-direction: column;
+  } 
+  .developers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .section_container_buttons_developers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* 3 developer-columns for medium screens */
+@media (min-width: 601px) and (max-width: 900px) {
+  .header_home {
+    flex-direction: column;
+  } 
+  .developers {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .section_container_buttons_developers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* 4 developer-columns for large screens */
+@media (min-width: 901px) {
+  .developers {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
