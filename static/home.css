@@ -42,8 +42,9 @@ p {
   
 }
 .developers .box {
-  background: #968a7f;
-  box-shadow: 5px 5px 5px #c6b8ab;
+  /* background: #968a7f; */
+  background-image: linear-gradient(#968a7f, #695747b9);
+  /* box-shadow: 5px 5px 5px #c6b8ab; */
   color: white;
   border-radius: 10px;
   margin: 20px 10px;
