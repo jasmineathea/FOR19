@@ -25,8 +25,8 @@ p {
     background: #90a897;
     color: #fff;
     border-radius: 10px;
-    margin: 20px 10px;
-    padding: 15px 20px;
+    margin: 20px 10px 20px 0px;
+    padding: 15px 12px;
     text-align:center;
     align-items: center;
     justify-content: center;
@@ -41,6 +41,7 @@ p {
   /* Section methodology */
   .section_body_methodology {
     background-color:#d8cdc3;
+    padding: 60px 0px;
   }
   .methodology {
     display: flex;  
@@ -99,3 +100,4 @@ p {
       flex-direction: column;
     } 
   }
+
