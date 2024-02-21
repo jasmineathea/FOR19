@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section class="section_header_forms">
+  <div class="container">
+
+  <div class="header_forms">
+    <div class="box"> 
+        <h1 class="page-title">Register here</h1>
+      <p style="text-align:left;">
+        Add registration form :)
+      </p>
+      <p style="text-align:left;">
+        Already have an account? Login down below!
+      </p>
+      <div class="container_buttons">
+        <div class="btn">
+            <a href="{{url_for('users.login')}}" class="btn_header">Login</a>
+        </div>
+      </div>  
+    </div>
+  </div>
+  </div>
+</section> 
+
+        
+{% endblock content %}

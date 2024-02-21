@@ -1,0 +1,45 @@
+/* CSS-file for the pages containing a login-form and a register-form */
+
+/* Utilities  */
+p {
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: left;
+  }
+  h4 {
+    font-size: 18px;
+    text-align: left;
+    font-weight: bold;
+  }
+  /* Section header */
+  .section_header_forms {
+    background-color:#90a897;
+  }
+  .header_forms {
+    display: flex;  
+    align-items: start;
+    background: #90a897;
+  }
+  .header_forms .box {
+    flex: 1;
+    background: #90a897;
+    color: #fff;
+    border-radius: 10px;
+    margin: 20px 10px 20px 0px;
+    padding: 15px 12px;
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+  }
+  .header_forms .box:nth-of-type(1) {
+    flex-grow:2;
+  }
+  .header_forms .box:nth-of-type(2) {
+    flex-grow:1;
+  }
+  
+  @media (max-width:768px) { 
+    .header_forms {
+      flex-direction: column;
+    } 
+  }
