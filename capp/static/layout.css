@@ -137,6 +137,7 @@ body {
 
 .btn{
   padding: 0px;
+  line-height: 1; /*fixes button height bug on login*/
 }
 
 .btn_header {
