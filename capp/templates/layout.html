@@ -63,7 +63,11 @@
           </div>
         </section>
 
-        {% block content %} {% endblock %}
+        <!-- Added content wrapper to push the footer to the bottom of the screen,
+        if the content is "too short" to fill the entire screen -->
+        <div class="content-wrapper">
+          {% block content %} {% endblock %}
+        </div>
 
         <section class="section_footer">
           <div class="container">

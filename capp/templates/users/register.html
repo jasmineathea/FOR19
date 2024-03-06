@@ -2,26 +2,38 @@
 {% block content %}
 
 <section class="section_header_forms">
-  <div class="container">
-
-  <div class="header_forms">
-    <div class="box"> 
-        <h1 class="page-title">Register here</h1>
-      <p style="text-align:left;">
-        Add registration form :)
-      </p>
-      <p style="text-align:left;">
-        Already have an account? Login down below!
-      </p>
-      <div class="container_buttons">
-        <div class="btn">
-            <a href="{{url_for('users.login')}}" class="btn_header">Login</a>
-        </div>
-      </div>  
+    <div class="container">
+        <div class="header_forms">
+            <div class="box">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <h1 class="page-title">Create a new account</h1>
+                        {% for field in [form.username, form.email, form.password, form.confirm_password] %}
+                            <div class="form-group">
+                                {{ field.label(class="form-control-label") }}
+                                {% if field.errors %}
+                                    {{ field(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in field.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ field(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="container_buttons btn btn_header") }}
+                    </div>
+                </form>
+                <p>Already Have An Account?<a href="{{ url_for('users.login') }}"> Sign In</p>
+            </div>
+        <div class="box" style="width: 325px; height: 325px;"></div>
     </div>
-  </div>
-  </div>
-</section> 
+</section>
+<section class="section_padding"></section>
 
-        
 {% endblock content %}
