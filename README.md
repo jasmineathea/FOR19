@@ -10,3 +10,7 @@ NHH | Spring 2024
 * Herman Wilter
 * Jasmine Athea Næss
 * Klara Evelina Palkint ​​
+
+### Known bugs after latest commit:
+* Footer is pushed too far down on `register`-page
+* `Login`and `Register`-buttons are larger on the form-pages than on any other page
