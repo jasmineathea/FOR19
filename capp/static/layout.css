@@ -93,6 +93,20 @@ body {
   color: #314736;
 }
 
+/* Style formatting: make the logo clickable (back to home-page) */
+.carbon_calc_navbar a.logo-link {
+  color: #314736;
+  background-color: transparent;
+  border-bottom: none;
+  padding: 0;
+}
+.carbon_calc_navbar a.logo-link:hover {
+  color: #4e6454;
+  background-color: transparent;
+  border-bottom: none;
+  padding: 0;
+}
+
 /* Footer */
 .section_footer{
   background-image: linear-gradient(#d8cdc3, #aa9d90);
