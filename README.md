@@ -12,4 +12,3 @@ NHH | Spring 2024
 * Klara Evelina Palkint ​​
 
 ### Known bugs after latest commit:
-* Footer is pushed too far down on `register`-page

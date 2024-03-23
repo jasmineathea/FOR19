@@ -16,7 +16,7 @@ def register():
       user = User(username=form.username.data, email=form.email.data, password=user_hashed_password)
       db.session.add(user)
       db.session.commit()
-      flash('Your account has been created! Now, you are able to login.', 'success')
+      flash('Your account has been created! ✅ Now, you are able to login.', 'success')
       return redirect(url_for('users.login'))
   return render_template('users/register.html', title='register', form=form)
 
@@ -30,14 +30,14 @@ def login():
     if user and bcrypt.check_password_hash(user.password, form.password.data):
         login_user(user, remember=form.remember.data)
         next_page = request.args.get('next')
-        flash('You have logged in! You now have access the carbon calculator.', 'success')
+        flash('You have been logged in successfully 🌍 The carbon calculator is ready for use!', 'success')
         return redirect(next_page) if next_page else redirect(url_for('home.home_home'))
     else:
-        flash('Login Unsuccessful. Please check email and password!', 'danger') 
+        flash('Login unsuccessful ❌ Please check email and password!', 'danger') 
   return render_template('users/login.html', title='login', form=form)
 
 @users.route('/logout')
 def logout():    
     logout_user()
-    flash('You have been logged out.', 'success')
+    flash('You have been logged out 👋🏾', 'success')
     return redirect(url_for('home.home_home'))
