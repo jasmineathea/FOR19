@@ -3,21 +3,17 @@
 
 <section class="section_header_forms">
   <div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="custom-flash-message" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
     <div class="header_forms">
       <div class="box">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              <div class="alert alert-{{ category }}">
-                {{ message }}
-                <br>
-                {{ form.email.data }}
-                <br>
-                {{ form.password.data }}
-              </div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
         <form method="POST" action="">
           {{ form.hidden_tag() }}
           <fieldset class="form-group">

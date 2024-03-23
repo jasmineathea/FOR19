@@ -4,7 +4,16 @@
 <!-- Header -->
 <section class="section_header_home">
   <div class="container">
-
+    <!-- Message on screen if a user has logged in -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="custom-flash-message" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <div class="header_home">
       <div class="box">
         <h1 class="page-title">Welcome to <b>Move Green™</b></h1>
@@ -25,7 +34,7 @@
         </div>
       </div>
       <div class="img-box">
-        <img src="{{url_for('static', filename='icons/bikes.png')}}" alt="two pepole riding a bicycle" />
+        <img src="{{url_for('static', filename='icons/bikes.png')}}" alt="two people riding a bicycle" />
       </div>
     </div>
 
