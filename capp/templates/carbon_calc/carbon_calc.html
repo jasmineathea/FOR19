@@ -59,6 +59,30 @@
     </section>
     <section class="section_padding">
         <h1 class="main-intro-text">Please select a mode of transportation</h1>
+
+        <div class="calc-cardview-container">
+            <div class="cardview-layout">
+                <i class="close-button fa-solid fa-circle-xmark fa-2xl" id="close-button"></i>
+               <form class="fill-forms">
+                   <div class="fill-form">
+                       <h3>Transportation Mode</h3>
+                       <div class="input-bar" id="transportation-mode"></div>
+                   </div>
+                   <div class="fill-form">
+                       <h3>Kilometers</h3>
+                       <input class="input-bar" type="number" required>
+                   </div>
+                   <div class="fill-form">
+                       <h3>Fuel Type</h3>
+                       <input class="input-bar">
+                   </div>
+                   <div class="action-button" type="submit">
+                    <h3>Calculate</h3>
+                    </div>
+               </form>
+           </div>  
+        </div>
+
         <div class="transport-selection-container">
             <div class="transport-item">
                 <div class="img-container">
@@ -124,21 +148,49 @@
     but server side won't allow that-->
    
     <script>
-        const transportContainer = document.querySelector(".transport-selection-container")
-        const transportCardview = document.querySelectorAll(".transport-item")
-        transportCardview.forEach(item => {
-            item.addEventListener("click", hideItems)
+
+        const sectionTitle = document.querySelector(".main-intro-text")
+
+        const transportElementsContainer = document.querySelector(".transport-selection-container")
+        const transportCardviews = document.querySelectorAll(".transport-item")
+
+        // Calculation Cardview elements
+        const calcCardiew = document.querySelector(".calc-cardview-container")
+        const closeButton = document.getElementById("close-button")
+        const firstFormItem = document.getElementById("transportation-mode")
+
+        transportCardviews.forEach(item => {
+            item.addEventListener("click", function() {
+                hideItems();
+                displayCalcCardview(item);
+            })
+        })
+
+        closeButton.addEventListener("click", function(){
+            showItems();
+            hideCalcCardview();
         })
 
         function hideItems(){
-            transportContainer.classList.add("transport-invisible")
-            displayInputField();
+            transportElementsContainer.style.display = "none";
         }
 
-        function displayInputField() {
-            /* This should actually move to new page and pass the item that
-             is selected into a form. To discuss with Jasmine*/
+        function showItems(){
+             transportElementsContainer.style.display = "flex";
         }
+
+        function displayCalcCardview(item) {
+            firstFormItem.textContent = item.querySelector("h3").textContent;
+            sectionTitle.innerHTML = "Lets Calculate!";
+            calcCardiew.style.display = "flex";
+        }
+
+        function hideCalcCardview(){
+            firstFormItem.textContent = "";
+            sectionTitle.innerHTML = "Please select a mode of transportation";
+            calcCardiew.style.display = "none";
+        }
+   
     </script>
        
 
