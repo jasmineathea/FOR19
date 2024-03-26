@@ -57,7 +57,89 @@
         
         </div>
     </section>
-    <section class="section_padding"></section>
+    <section class="section_padding">
+        <h1 class="main-intro-text">Please select a mode of transportation</h1>
+        <div class="transport-selection-container">
+            <div class="transport-item">
+                <div class="img-container">
+                    <img src="https://i.postimg.cc/zfwd1GPL/car.avif">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Car</h3>
+                </div>
+            </div>
+            <div class="transport-item">
+                <div class="img-container">
+                    <img src="https://i.postimg.cc/XYRKq6yw/bus.jpg">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Bus</h3>
+                </div>
+            </div>
+            <div class="transport-item">
+                <div class="img-container">
+                    <img src="https://i.postimg.cc/zfNyRttb/airplane-background.jpg">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Airplane</h3>
+                </div>
+            </div>
+            <div class="transport-item">
+                <div class="img-container">
+                    <img src="https://i.postimg.cc/pT22JyFR/train.jpg">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Train</h3>
+                </div>
+            </div>
+            <div class="transport-item">
+                <div class="img-container">
+                    <img src="https://i.postimg.cc/ZRTwYz1w/ferry.webp">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Ferry</h3>
+                </div>
+            </div>
+            <div class="transport-item">
+                <div class="img-container">
+                    <img src="https://i.postimg.cc/SR4Ybm3K/walk.jpg">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Walking</h3>
+                </div>
+            </div>
+            <div class="transport-item">
+                <div class="img-container">
+                    <img src="https://i.postimg.cc/P5pzd5NX/bike.jpg">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Bike</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- This is JS code that should run on a seperate .js file but
+    but server side won't allow that-->
+   
+    <script>
+        const transportContainer = document.querySelector(".transport-selection-container")
+        const transportCardview = document.querySelectorAll(".transport-item")
+        transportCardview.forEach(item => {
+            item.addEventListener("click", hideItems)
+        })
+
+        function hideItems(){
+            transportContainer.classList.add("transport-invisible")
+            displayInputField();
+        }
+
+        function displayInputField() {
+            /* This should actually move to new page and pass the item that
+             is selected into a form. To discuss with Jasmine*/
+        }
+    </script>
        
 
 {% endblock content %}
