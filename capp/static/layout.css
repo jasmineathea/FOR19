@@ -106,9 +106,24 @@ body {
   padding: 0;
 }
 
-/* Footer */
+/* Footer wave pattern */
+.footer-wave {
+  background-color: #aa9d90;
+  color: #fff;
+}
+.footer-wave-svg {
+  background-color: transparent;
+  display: block;
+  height: 30px;
+  position: relative;
+  top: -1px;
+  width: 100%;
+}
+.footer-wave-path {
+  fill: #d8cdc3;
+}
 .section_footer{
-  background-image: linear-gradient(#d8cdc3, #aa9d90);
+  background-color: #aa9d90;
   width: 100%;
 }
 .footer {
@@ -116,6 +131,52 @@ body {
   justify-content: center;
   align-items: center;
   padding: 10px 0;
+}
+.footer p {
+  color: #fff;
+  margin: 15px 0 10px 0;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+/* Footer links ("menu") */
+.social-icon,
+.menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+.menu__item {
+  list-style: none;
+}
+.menu__link {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0 10px;
+  display: inline-block;
+  transition: 0.5s;
+  text-decoration: none;
+  opacity: 0.75;
+  font-weight: 300;
+}
+.menu__link:hover {
+  color: #695747;
+}
+.social-icon__item {
+  list-style: none;
+  font-size: 2rem;
+  margin: 0 10px;
+  display: inline-block;
+}
+.social-icon__item a {
+  color: #fff; 
+  transition: 0.5s;
+}
+.social-icon__item a:hover {
+  color: #695747;
 }
 
 /* Title text on every page */
