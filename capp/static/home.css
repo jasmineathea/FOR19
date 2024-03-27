@@ -139,28 +139,22 @@ p {
 }
 
 /* Make sections screen responsive */
-/* Default to 2 developer-columns on small screens */
 @media (max-width: 600px) {
   .header_home {
     flex-direction: column;
   } 
   .developers {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .section_container_buttons_developers {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
-/* 3 developer-columns for medium screens */
+/* 2 developer-columns for medium screens */
 @media (min-width: 601px) and (max-width: 900px) {
   .header_home {
     flex-direction: column;
   } 
   .developers {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
   .section_container_buttons_developers {
     display: flex;
