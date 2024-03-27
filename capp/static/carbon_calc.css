@@ -135,7 +135,7 @@ p {
     margin-top: 2%;
 }
 
-#transportation-mode{ /*The first input bar doesn't act as an input bar and thus we need to set center the text manually*/
+#transportation-input{ /*The first input bar doesn't act as an input bar and thus we need to center the text manually*/
   display: flex;
   justify-content: center;
   align-items: center;

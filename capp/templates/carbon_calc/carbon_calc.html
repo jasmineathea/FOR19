@@ -66,15 +66,15 @@
                <form class="fill-forms">
                    <div class="fill-form">
                        <h3>Transportation Mode</h3>
-                       <div class="input-bar" id="transportation-mode"></div>
+                       <div class="input-bar" id="transportation-input"></div>
                    </div>
                    <div class="fill-form">
                        <h3>Kilometers</h3>
-                       <input class="input-bar" type="number" required>
+                       <input class="input-bar" type="number" id="kilometers-input">
                    </div>
-                   <div class="fill-form">
+                   <div class="fill-form" id="fuel-form">
                        <h3>Fuel Type</h3>
-                       <input class="input-bar">
+                       <input class="input-bar" id="fuel-input">
                    </div>
                    <div class="action-button" type="submit">
                     <h3>Calculate</h3>
@@ -157,7 +157,10 @@
         // Calculation Cardview elements
         const calcCardiew = document.querySelector(".calc-cardview-container")
         const closeButton = document.getElementById("close-button")
-        const firstFormItem = document.getElementById("transportation-mode")
+        const transportFormInput = document.getElementById("transportation-input")
+        const kilometersFormInput = document.getElementById("kilometers-input")
+        const fuelFormElement = document.getElementById("fuel-form")
+        const fuelFormInput = document.getElementById("fuel-input")
 
         transportCardviews.forEach(item => {
             item.addEventListener("click", function() {
@@ -180,15 +183,26 @@
         }
 
         function displayCalcCardview(item) {
-            firstFormItem.textContent = item.querySelector("h3").textContent;
+            const selectedTransport = item.querySelector("h3").textContent
+            transportFormInput.textContent = selectedTransport;
+            if (selectedTransport === "Walking" || selectedTransport === "Bike"){
+                fuelFormElement.style.display = "none";
+            }else{
+                fuelFormElement.style.display = "block"
+            }
             sectionTitle.innerHTML = "Lets Calculate!";
             calcCardiew.style.display = "flex";
         }
 
         function hideCalcCardview(){
-            firstFormItem.textContent = "";
             sectionTitle.innerHTML = "Please select a mode of transportation";
             calcCardiew.style.display = "none";
+            resetInputFields();
+        }
+
+        function resetInputFields(){
+            kilometersFormInput.value = ""
+            fuelFormInput.value = ""
         }
    
     </script>
