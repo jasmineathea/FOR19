@@ -151,7 +151,9 @@ body {
 }
 .menu__item {
   list-style: none;
+  margin-right: 25px;
 }
+
 .menu__link {
   font-size: 1.2rem;
   color: #fff;
