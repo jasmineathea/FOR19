@@ -238,19 +238,30 @@ body {
 /* Media query */
 @media(max-width:768px){
   .carbon_calc_navbar {
-    height: 160px;
+    height: auto;
     flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  .carbon_calc_navbar .logo {
+    padding: 10px 15px; 
+    margin: 2px 0;
   }
   .carbon_calc_navbar a {
-    font-size: 15px;
-    padding: 5px 20px;
+    font-size: 14px;
+    padding: 10px 15px;
+    margin: 2px 0;
+    display: block;
   }
   .carbon_calc_navbar ul {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%; 
+    align-items: center;
   }
-  .carbon_calc_navbar a:hover{
+  .carbon_calc_navbar a:hover {
     color: #568c63;
-    /* border-bottom: #d8cdc3 2px solid; */
+    background-color: #d8cdc3;
+    border-radius: 4px;
   }
 }
