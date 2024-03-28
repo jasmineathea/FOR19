@@ -43,6 +43,22 @@ p {
   height: 100%;
 }
 
+/* Header wave pattern */
+.header-wave {
+  background-color:#90a897;
+}
+.header-wave-svg {
+  background-color: transparent;
+  display: block;
+  height: 30px;
+  position: relative;
+  width: 100%;
+  transform: scaleY(-1);
+}
+.header-wave-path {
+  fill: #d8cdc3;
+}
+
 /* Custom flash message fomatting */
 .custom-flash-message {
   /* background-color: #90a897; */
