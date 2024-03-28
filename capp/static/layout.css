@@ -16,6 +16,8 @@ body {
 .container {
   margin: auto;
   max-width: 1320px;
+  width: 100%;
+
 }
 ul { 
   /* list-style: none; */
@@ -55,52 +57,55 @@ body {
   background-color: #d8cdc3;
 }
 
-/* Navbar */
+/* Navigation bar */
 .section_carbon_calc_navbar {
-  background-image: linear-gradient(#57745f, #90a897);
+  background-color: #90a897;
 }
 .carbon_calc_navbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 65px;
   align-items: center;
+  height: 65px;
   padding: 0 12px;
 }
-
 .carbon_calc_navbar a {
-  color: #d8cdc3;
-  padding: 15px 30px 15px;
+  color: #314736;
+  padding: 15px 30px 15px; /* Adjust padding as needed */
   font-size: 20px;
   text-decoration: none;
+  display: flex;
   align-items: center;
+}
+.carbon_calc_navbar a i {
+  margin-right: 8px;
 }
 .carbon_calc_navbar a:hover{
   color: #d8cdc3;
-  background-color: #4e6454;
-  border-bottom: #d8cdc3 4px solid;
 }
 .carbon_calc_navbar ul {
   display: flex;
   flex-direction: row;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
+/* Logo in navigation bar */
 .carbon_calc_navbar .logo {
   font-weight: bold;
   font-size: 30px;
+  margin: 0;
+  padding: 0;
+}
+.carbon_calc_navbar .logo a i {
+  margin-right: 0;
 }
 .text-logo {
   color: #314736;
 }
-
 /* Style formatting: make the logo clickable (back to home-page) */
 .carbon_calc_navbar a.logo-link {
-  color: #314736;
-  background-color: transparent;
-  border-bottom: none;
-  padding: 0;
-}
-.carbon_calc_navbar a.logo-link:hover {
-  color: #4e6454;
   background-color: transparent;
   border-bottom: none;
   padding: 0;
@@ -233,19 +238,30 @@ body {
 /* Media query */
 @media(max-width:768px){
   .carbon_calc_navbar {
-    height: 160px;
+    height: auto;
     flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  .carbon_calc_navbar .logo {
+    padding: 10px 15px; 
+    margin: 2px 0;
   }
   .carbon_calc_navbar a {
-    font-size: 15px;
-    padding: 5px 20px;
+    font-size: 14px;
+    padding: 10px 15px;
+    margin: 2px 0;
+    display: block;
   }
   .carbon_calc_navbar ul {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%; 
+    align-items: center;
   }
-  .carbon_calc_navbar a:hover{
+  .carbon_calc_navbar a:hover {
     color: #568c63;
-    /* border-bottom: #d8cdc3 2px solid; */
+    background-color: #d8cdc3;
+    border-radius: 4px;
   }
 }
