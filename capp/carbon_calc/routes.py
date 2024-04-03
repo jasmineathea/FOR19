@@ -3,9 +3,9 @@ from capp.models import Transport
 from capp import db
 from datetime import timedelta, datetime
 from flask_login import login_required, current_user
-from capp.carbon_app.forms import BusForm, CarForm, PlaneForm, FerryForm, MotorbikeForm, BicycleForm, WalkForm
+from capp.carbon_calc.forms import BusForm, CarForm, PlaneForm, FerryForm, MotorbikeForm, BicycleForm, WalkForm
 
-carbon_app=Blueprint('carbon_app',__name__)
+carbon_calc=Blueprint('carbon_calc',__name__)
 
 #Emissions factor per transport in kg per passemger km
 #Data from: http://efdb.apps.eea.europa.eu/?source=%7B%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%2C%22display_type%22%3A%22tabular%22%7D
@@ -27,13 +27,13 @@ efch4={'Bus':{'Diesel':2e-5,'CNG':2.5e-3,'Petrol':2e-5,'No Fossil Fuel':0},
     'Walk':{'No Fossil Fuel':0}}
 
 #Carbon app, main page
-@carbon_app.route('/carbon_app')
+@carbon_calc.route('/carbon_cacl')
 @login_required
-def carbon_app_home():
-    return render_template('carbon_app/carbon_app.html', title='carbon_app')
+def carbon_calc_home():
+    return render_template('carbon_calc/carbon_calc.html', title='carbon_calc')
 
 #New entry bus
-@carbon_app.route('/carbon_app/new_entry_bus', methods=['GET','POST'])
+@carbon_calc.route('/carbon_calc/new_entry_bus', methods=['GET','POST'])
 @login_required
 def new_entry_bus():
     form = BusForm()
@@ -163,7 +163,7 @@ def new_entry_motorbike():
     return render_template('carbon_app/new_entry_motorbike.html', title='new entry motorbike', form=form) 
 
 #New entry bicycle
-@carbon_app.route('/carbon_app/new_entry_bicycle', methods=['GET','POST'])
+@carbon_calc.route('/carbon_calc/new_entry_bicycle', methods=['GET','POST'])
 @login_required
 def new_entry_bicycle():
     form = BicycleForm()
@@ -185,11 +185,11 @@ def new_entry_bicycle():
         emissions = Transport(kms=kms, transport=transport, fuel=fuel, co2=co2, ch4=ch4, total=total, author=current_user)
         db.session.add(emissions)
         db.session.commit()
-        return redirect(url_for('carbon_app.your_data'))
-    return render_template('carbon_app/new_entry_bicycle.html', title='new entry bicycle', form=form)
+        return redirect(url_for('carbon_calc.your_data'))
+    return render_template('carbon_calc/new_entry_bicycle.html', title='new entry bicycle', form=form)
 
 #New entry walk
-@carbon_app.route('/carbon_app/new_entry_walk', methods=['GET','POST'])
+@carbon_calc.route('/carbon_calc/new_entry_walk', methods=['GET','POST'])
 @login_required
 def new_entry_walk():
     form = WalkForm()
@@ -211,25 +211,25 @@ def new_entry_walk():
         emissions = Transport(kms=kms, transport=transport, fuel=fuel, co2=co2, ch4=ch4, total=total, author=current_user)
         db.session.add(emissions)
         db.session.commit()
-        return redirect(url_for('carbon_app.your_data'))
-    return render_template('carbon_app/new_entry_walk.html', title='new entry walk', form=form)
+        return redirect(url_for('carbon_calc.your_data'))
+    return render_template('carbon_calc/new_entry_walk.html', title='new entry walk', form=form)
 
 #Your data
-@carbon_app.route('/carbon_app/your_data')
+@carbon_calc.route('/carbon_calc/your_data')
 @login_required
 def your_data():
     #Table
     entries = Transport.query.filter_by(author=current_user). \
         filter(Transport.date> (datetime.now() - timedelta(days=5))).\
         order_by(Transport.date.desc()).order_by(Transport.transport.asc()).all()
-    return render_template('carbon_app/your_data.html', title='your_data', entries=entries)
+    return render_template('carbon_calc/your_data.html', title='your_data', entries=entries)
 
 #Delete emission
-@carbon_app.route('/carbon_app/delete-emission/<int:entry_id>')
+@carbon_calc.route('/carbon_calc/delete-emission/<int:entry_id>')
 def delete_emission(entry_id):
     entry = Transport.query.get_or_404(int(entry_id))
     db.session.delete(entry)
     db.session.commit()
     flash("Entry deleted", "success")
-    return redirect(url_for('carbon_app.your_data'))
+    return redirect(url_for('carbon_calc.your_data'))
     
