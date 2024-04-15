@@ -88,8 +88,9 @@
         </div>
 
         <div class="transport-selection-container">
-            <div class="transport-item">
+            <div class="transport-item">'
                 <div class="transport-img-container">
+                    <a class="btn_carbon_app_new_entry_main" href="{{url_for('carbon_calc.new_entry_car')}}">New Entry</a>
                     <img src="/static/icons/transport-icons/car.avif">
                 </div>
                 <div class="transport-item-title">
@@ -138,7 +139,7 @@
             </div>
             <div class="transport-item">
                 <div class="transport-img-container">
-                    <img src="https://i.postimg.cc/P5pzd5NX/bike.jpg">
+                    <img src="https://i.postimg.cc/P5pzd5NX/bike.jpg" href="http://127.0.0.1:5000/carbon_calc/bike">
                 </div>
                 <div class="transport-item-title">
                     <h3>Bike</h3>
@@ -151,7 +152,7 @@
     <!-- This is JS code that should run on a seperate .js file but
     but server side won't allow that-->
    
-    <script>
+    <!-- <script>
 
         const sectionTitle = document.querySelector(".main-intro-text")
 
@@ -209,7 +210,7 @@
             fuelFormInput.value = ""
         }
    
-    </script>
+    </script> -->
        
 
 {% endblock content %}
