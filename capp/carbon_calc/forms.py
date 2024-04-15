@@ -5,31 +5,31 @@ from wtforms.validators import InputRequired
 class BusForm(FlaskForm):
   kms = FloatField('Kilometers', [InputRequired()])
   fuel_type = SelectField('Type of Fuel', [InputRequired()], 
-    choices=[('Diesel', 'Diesel'), ('CNG', 'CNG'), ('Petrol', 'Petrol'), ('No Fossil Fuel', 'No Fossil Fuel')])
+    choices=[('Diesel', 'Diesel'), ('Electric', 'Electric'), ('Hybrid', 'Hybrid'), ('Hydrogen', 'Hydrogen')])
   submit = SubmitField('Submit')
 
 class CarForm(FlaskForm):
   kms = FloatField('Kilometers', [InputRequired()])
   fuel_type = SelectField('Type of Fuel', [InputRequired()], 
-    choices=[('Petrol', 'Petrol'), ('Diesel', 'Diesel'), ('No Fossil Fuel', 'No Fossil Fuel')])
+    choices=[('Gasoline', 'Gesoline'), ('Diesel', 'Diesel'), ('Electric','Electric'), ('Hybrid', 'Hybrid'), ('Hydrogen','Hydrogen')])
   submit = SubmitField('Submit')  
 
 class PlaneForm(FlaskForm):
   kms = FloatField('Kilometers', [InputRequired()])
   fuel_type = SelectField('Type of Fuel', [InputRequired()], 
-    choices=[('Petrol', 'Petrol')])
+    choices=[('Short-haul(Buisness)','Short-haul(Buisness)'),('Long-haul(Economy)','Long-haul(Economy)'),('Long-haul(First-class)','Long-haul(First-class)'),('International(Economy)', 'International(Economy)'),('International (Premium economy)','International (Premium economy)'),('International (Buisness)', 'International (Buisness)'),('International (First Class)','International (First Class)')])
   submit = SubmitField('Submit')
   
 class FerryForm(FlaskForm):
   kms = FloatField('Kilometers', [InputRequired()])
   fuel_type = SelectField('Type of Fuel', [InputRequired()], 
-    choices=[('Diesel', 'Diesel'), ('CNG', 'CNG'), ('No Fossil Fuel', 'No Fossil Fuel')])
+    choices=[('Regular', 'Regular'), ('High-speed', 'High-speed')])
   submit = SubmitField('Submit')  
 
 class MotorbikeForm(FlaskForm):
   kms = FloatField('Kilometers', [InputRequired()])
   fuel_type = SelectField('Type of Fuel', [InputRequired()], 
-    choices=[('Petrol', 'Petrol'), ('No Fossil Fuel', 'No Fossil Fuel')])
+    choices=[('≤125cc', '≤125cc'), ('125cc to 500cc', '125cc to 500cc'),('>500cc','>500cc')])
   submit = SubmitField('Submit')
 
 class BicycleForm(FlaskForm):
