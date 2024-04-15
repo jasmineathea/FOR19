@@ -11,6 +11,16 @@ p {
   ol {
     font-size: 18px;
   }
+  li {
+    padding: 3px;
+  }
+  mark {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #d8cdc3;
+    background-color: #695747;
+    border-radius: 5px;
+  }
   /* Section header */
   .section_header_methodology {
     background-color:#90a897;
