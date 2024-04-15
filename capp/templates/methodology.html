@@ -9,7 +9,7 @@
         <div class="box"> 
             <h1 class="page-title">Methodology</h1>
           <p style="text-align:left;">
-              In this methodology section, we outline the approach used to incorporate mathematical expressions within text and present formulas for calculating carbon dioxide emissions from buses. To calculate carbon dioxide emissions from buses, a specific formula is employed. The formula takes into account various factors such as the type of fuel, distance traveled, and temperature. 
+            Our methodology is based on collecting real data on carbon emissions. To better aid our users in making informed decisions about their travel choices, we developed an application that will help calculate carbon emissions produced from their transportation choices. We will be using a carbon footprint analysis in order to find the necessary data and statistics to calculate the emissions. By default, there will be six options for the users to choose from - <b>Bus, Car, Motorbike, Air Travel, Train, Ferry</b> and <b>Bicycle</b>. Users will also be asked to choose what type of vehicle it is for eg. petrol, diesel, hybrid, hydrogen and electric, and the amount of kilometres travelled using that vehicle. Using the information provided, the carbon emissions will be calculated using the formula in the carbon calculator.
           </p>
           <div class="container_buttons">
             <div class="btn">
@@ -32,46 +32,62 @@
 <!-- Methodology -->
 <section class="section_body_methodology">
     <div class="container">
-  
-        <!-- <div class="methodology" style="display:block;">
-            <h1 style="text-align:center;"> Methodology</h1>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-            </p>      
-        </div> -->
-
         <div class="methodology" style="display:block;">
-            <h1 class="main-intro-text">Our numbers and formulas</h1>
+            <h1 class="main-intro-text">Calculations</h1>
             <p class="main-extra-text">
-              Some \(\LaTeX ~ formulas\) that could be useful for our project:
-            </p> 
+                To calculate the total carbon emissions produced, we factor in the transport emissions produced per passenger per kilometre for each respective vehicle used multiplied by the total kilometres travelled:
+            </p>
+            <div class="formula" style="height:80px;">
+                <p class="main-extra-text">
+                    <b>\( \text{CO}_2 \) * km = total carbon emissions</b>
+                </p>                       
+            </div>
         </div>
 
         <!--Enumerated list (table with two columns)-->
         <div class="methodology"> 
-            <div class="box_table2" style="height:200px;">
+            <div class="box_table2" style="height:300px;">
                 <ol start="1">
                     <li>
-                        <h4>Mathematical expressions 1</h4>
-                        <p class="text-left">
-                            Mathematical expressions \( x = {-b \pm \sqrt{b^2-4ac} \over 2a} \) inside text.
-                            <br>
-                            Mathematical expressions outside text:
-                            \[ x = {-b \pm \sqrt{b^2-4ac} \over 2a} \]
+                        <h4>Cars: fuel types and emissions in kg</h4>
+                        <ul style="text-align:left;">
+                            <li>
+                                Gasoline: 0.0384
+                            </li>
+                            <li>
+                                Diesel: 0.0342
+                            </li>
+                            <li>
+                                Hybrid: 0.0298
+                            </li>
+                            <li>
+                                Electric: 0.0106
+                            </li>
+                            <li>
+                                Hydrogen: 0*
+                            </li>
+                        </ul>
+                        <p><i><small>*although they do not produce any emissions other than water, hydrogen gas, when leaked into the atmosphere, has a Global Warming Potential of around 11, compared to CO2 which has a GWP of 1.</small></i>
                         </p>
                     </li>
                 </ol>                        
             </div>
-            <div class="box_table2" style="height:200px;">
+            <div class="box_table2" style="height:300px;">
                 <ol start="2">
                     <li>
-                        <h4>Mathematical expressions 2</h4>
-                        <p class="text-left">
-                            Mathematical expressions \( x^2 + y^2 = z^2 \) inside text.
-                            <br>
-                            Mathematical expressions outside text:
-                            \[ x^2 + y^2 = z^2 \]
-                        </p>
+                        <h4>Motorbike: engine size and emissions in kg</h4>
+                        <ul style="text-align:left;">
+                            <li>
+                                ≤ 125cc: 0.0415
+                            </li>
+                            <li>
+                                125cc to 500cc: 0.0505
+                            </li>
+                            <li>
+                                > 500cc: 0.0665
+                            </li>
+                        </ul>
+                        <p>The greater the engine size, the more carbon emissions is produced.</p>
                     </li>
                 </ol>
             </div>  
@@ -79,126 +95,116 @@
 
         <!--Enumerated list (table with two columns)-->
         <div class="methodology"> 
-            <div class="box_table2" style="height:425px;">
+            <div class="box_table2" style="height:300px;">
                 <ol start="3">
                     <li>
-                        <h4>Sums</h4>
+                        <h4>Bus: fuel types and emissions in kg</h4>
                         <p class="text-left">
-                            Sum \(\sum_{n=1}^{\infty} 2^{-n} = 1\) inside text.
-                            <br>
-                            Sum outside text:
-                            \[ \sum_{n=1}^{\infty} 2^{-n} = 1 \]
-                        </p>
-                    </li>
-                    <li>
-                        <h4>Products</h4>
-                        <p class="text-left">
-                            Product \(\prod_{i=a}^{b} f(i)\) inside text.
-                            <br>
-                            Product outside text:
-                            \[ \prod_{i=a}^{b} f(i) \]
-                        </p>
+                        <ul style="text-align:left;">
+                            <li>
+                                Diesel: 0.105
+                            </li>
+                            <li>
+                                Hybrid: 0.054
+                            </li>
+                            <li>
+                                Electric: 0.02052
+                            </li>
+                        </ul>
+                        <p>We are assuming that it is a typical urban bus which carries approximately 70 passengers each time.</p>
                     </li>
                 </ol>                        
             </div>
-            <div class="box_table2" style="height:425px;">
+            <div class="box_table2" style="height:300px;">
                 <ol start="5">
                     <li>
-                        <h4>Limits</h4>
+                        <h4>Train: fuel types and emissions in kg</h4>
                         <p class="text-left">
-                            Limit \(\lim_{x\to\infty} f(x)\) inside text.
-                            <br>
-                            Limit outside text:
-                            \[ \lim_{x\to\infty} f(x) \]
-                        </p>
+                        <ul style="text-align:left;">
+                            <li>
+                                Diesel: 0.091
+                            </li>
+                            <li>
+                                Electric (Nordic): 0.024
+                            </li>
+                            <li>
+                                Electric (EU): 0.007
+                            </li>
+                        </ul>
+                        <p>The Nordic standard differentiates from the EU standard since energy production in the Nordic countries is much greener, with a higher percent of the produced energy coming from renewable resources.</p>
                     </li>
+                </ol>
+            </div>  
+        </div>
+    
+        <!--Enumerated list (table with two columns)-->
+        <div class="methodology"> 
+            <div class="box_table2" style="height:300px;">
+                <ol start="5">
                     <li>
-                        <h4>Integrals</h4>
-                        <p class="text-left">
-                            Integral \(\int_{a}^{b} x^2 \,dx\) inside text.
-                            <br>
-                            Integral outside text:
-                            \[ \int_{a}^{b} x^2 \,dx \]
-                        </p>
+                        <h4>Ferry: speed and emissions in kg</h4>
+                        <ul style="text-align:left;">
+                            <li>
+                                Regular: 0.091
+                            </li>
+                            <li>
+                                High speed: 0.024
+                            </li>
+                            <li>
+                                Electric (EU): 0.007
+                            </li>
+                        </ul>
+                        <p>Regular ferries are those within the country whereas high-speed ferries are those who travel across countries. For all ferries, we are assuming that each ferry holds an average of 309 passengers.</p>
+                    </li>
+                </ol>                        
+            </div>
+            <div class="box_table2" style="height:300px;">
+                <ol start="6">
+                    <li>
+                        <h4>Air Travel: flight type and emissions in kg</h4>
+                        <ul style="text-align:left;">
+                            <li>
+                                Domestic: 0.224
+                            </li>
+                            <li>
+                                Short haul: 0.15 - 0.225
+                            </li>
+                            <li>
+                                Long haul: 0.147 - 0.558
+                            </li>
+                            <li>
+                                International: 0.14 - 0.56
+                            </li>
+                        </ul>
+                        <p>The different types of classes will affect these calculatons: Economy class, Premium economy, Business class and First Class.</p>
                     </li>
                 </ol>
             </div>  
         </div>
 
-        <!--Enumerated list (table with one column)-->
-        <div class="methodology">              
-            <div class="box_table1">
-                      
-            </div>
-            <div class="box_table1">
-                <ol>
-                    <li>
-                        <h4>Buses</h4>
-                        <p class="text-left">
-                            The <strong>carbon dioxide emissions</strong> produced by buses are organized in <strong>four categories</strong>. The carbon dioxide emission produced by diesel buses is 0.10231 grammes per kilometer. The carbon dioxide emission produced by CNG buses is 0.08 grammes per kilometer. The carbon dioxide emission produced by petrol buses is 0.10231 grammes per kilometer. If the buses do not use fossil fuel, their dioxide carbon emissions are 0 grammes per kilometer.
-                            <br>
-                            To work out buses dioxide emissions, we use the next formula:
-                            \[CO^2 = {Cte + \sqrt{f(km)} \over t}.\]
-                            <br>
-                            Where:
-                            <ul style="text-align:left;">
-                                <li>
-                                    \(Cte\) is a constant, since the engine requires some fuel to initialize.
-                                </li>
-                                <li>
-                                    \(km\) are the kilometers.
-                                </li>
-                                <li>
-                                    \(f\) is a coefficient depending on the type of fuel (see paragraph above).
-                                </li>
-                                <li>
-                                    \(t\) is the temperature, since in winter the engines require less fuel.
-                                </li>
-                            </ul>
-                            
-                        </p>
-                    </li>
-                    <li>
-                        <h4>Cars</h4>
-                        <p class="text-left">
-                            The <strong>carbon dioxide emissions</strong> produced by cars can be calculated through determining the size of a car. There are four sizes of cars included in this calculation, Small car, medium car, Big car (7 seater) and Camper. 
-                            The carbon dioxide emission produced by medium sized diesel car is 137 grammes of CO2 per vehicle per kilometer.
-                            The carbon dioxide emission produced by medium sized petrol car on the other hand is 167 grammes of CO2 per vehicle per kilometer.
-                            <br>
-                            To work out buses dioxide emissions, we use the next formula:
-                            \[CO^2 = {Cte + \sqrt{f(km)} \over t}.\]
-                            <br>
-                            Where:
-                            <ul style="text-align:left;">
-                                <li>
-                                    \(Cte\) is a constant, since the engine requires some fuel to initialize.
-                                </li>
-                                <li>
-                                    \(km\) are the kilometers.
-                                </li>
-                                <li>
-                                    \(f\) is a coefficient depending on the type of fuel (see paragraph above).
-                                </li>
-                                <li>
-                                    \(t\) is the temperature, since in winter the engines require less fuel.
-                                </li>
-                            </ul>
-                            <br>
-                        </p>
-                    </li>
-                    <li>
-                        <h4>Planes</h4>
-                        <p class="text-left">
-                            ...
-                        </p>
-                    </li>
-                </ol>                        
-            </div>
-            <div class="box_table1">
-                      
-            </div>  
+        <!--Enumerated list (table with two columns)-->
+        <div class="methodology"> 
+        <div class="box_table2" style="height:100px;">
+            <ol start="7">
+                <li>
+                    <h4>Bicycle</h4>
+                    <ul style="text-align:left;">
+                    <p>No carbon emissions are being produced for bicycles.</p>
+                </li>
+            </ol>                        
         </div>
+        <div class="box_table2" style="height:100px;">
+            <ol start="8">
+                <li>
+                    <h4>By foot</h4>
+                    <ul style="text-align:left;">
+                    <p>No carbon emissions are being produced for on-foot walking.</p>
+                </li>
+            </ol>
+        </div>  
+    </div>
 
+    </div>
     </div>
 </section>
 
