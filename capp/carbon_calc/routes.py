@@ -8,13 +8,12 @@ from capp.carbon_app.forms import BusForm, CarForm, PlaneForm, FerryForm, Motorb
 carbon_app=Blueprint('carbon_app',__name__)
 
 #Emissions factor per transport in kg per passemger km
-#Data from: http://efdb.apps.eea.europa.eu/?source=%7B%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%2C%22display_type%22%3A%22tabular%22%7D
-efco2={'Bus':{'Diesel':0.10231,'CNG':0.08,'Petrol':0.10231,'No Fossil Fuel':0},
-    'Car':{'Petrol':0.18592,'Diesel':0.16453,'No Fossil Fuel':0},
-    'Plane':{'Petrol':0.24298},
-    'Ferry':{'Diesel':0.11131, 'CNG':0.1131, 'No Fossil Fuel':0},
-    'Motorbike':{'Petrol':0.09816,'No Fossil Fuel':0},
-    'Scooter':{'No Fossil Fuel':0},
+efco2={'Bus':{'Diesel':0.105,'Electric':0.03052,'Hybrid':0.054},
+    'Car':{'Gasoline':0.0384,'Diesel':0.0343,'Hybrid':0.0298,'Electric':0.0106,'Hydrogen':0},
+    'Plane':{'Short-haul(Buisness)':0.147, 'Long-haul(Economy)': 0.235, 'Long-haul(Premium economy)': 0.427, 'Long-haul(First-class)': 0.558, 'International(Economy)': 0.140, 'International (Premium economy)': 0.229, 'International (Buisness)': 0.406, 'International (First Class)': 0.560},
+    'Ferry':{'Regular':0.226, 'High-speed':0.452},
+    'Train':{'Diesel':0.091, 'Electric (Nordic)':0.024, 'Electric (EU)': 0.007},
+    'Motorbike':{'≤125cc':0.0415,'125cc to 500cc':0.0505, '>125cc':0.0665,},
     'Bicycle':{'No Fossil Fuel':0},
     'Walk':{'No Fossil Fuel':0}}
 
