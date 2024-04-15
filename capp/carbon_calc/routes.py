@@ -13,7 +13,7 @@ efco2={'Bus':{'Diesel':0.105,'Electric':0.03052,'Hybrid':0.054},
     'Plane':{'Short-haul(Buisness)':0.147, 'Long-haul(Economy)': 0.235, 'Long-haul(Premium economy)': 0.427, 'Long-haul(First-class)': 0.558, 'International(Economy)': 0.140, 'International (Premium economy)': 0.229, 'International (Buisness)': 0.406, 'International (First Class)': 0.560},
     'Ferry':{'Regular':0.226, 'High-speed':0.452},
     'Train':{'Diesel':0.091, 'Electric (Nordic)':0.024, 'Electric (EU)': 0.007},
-    'Motorbike':{'≤125cc':0.0415,'125cc to 500cc':0.0505, '>125cc':0.0665,},
+    'Motorbike':{'≤125cc':0.0415,'125cc to 500cc':0.0505, '>500cc':0.0665,},
     'Bicycle':{'No Fossil Fuel':0},
     'Walk':{'No Fossil Fuel':0}}
 
