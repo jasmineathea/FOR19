@@ -16,7 +16,7 @@ brun
 
 button dev background:
 mørk brun
-#968a7f
+#695747
 
 title / logo:
 mørk grønn
