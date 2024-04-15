@@ -49,9 +49,9 @@ body.forEach((element) => {
   }
 
   cars.addEventListener("change", async (event) => {
-    const value = event.target.value;
-    const makes = await getMake(value)
-    makes.sort((a, b) => {
+  const value = event.target.value;
+  const makes = await getMake(value)
+  makes.sort((a, b) => {
     if (a.data.attributes.name < b.data.attributes.name) {
       return -1
     }
@@ -61,6 +61,11 @@ body.forEach((element) => {
     return 0
   })
 
+  // Remove all existing options from the models select element
+  while (models.firstChild) {
+    models.removeChild(models.firstChild);
+  }
+
   makes.forEach((element) => {
     const option = document.createElement("option")
     option.value = element.data.id
@@ -68,7 +73,7 @@ body.forEach((element) => {
     models.appendChild(option)
   })
 
-  })
+})
 
   
 </script>
@@ -86,6 +91,9 @@ body.forEach((element) => {
         <p>
           <ol style="text-align: left;">
             <li>
+              Choose either a specified car make and model, or a default car
+            </li>
+            <li>
               Please, enter the number of kilometers.
             </li>
             <li>
@@ -97,7 +105,7 @@ body.forEach((element) => {
               {{ form.csrf_token }}
               <fieldset class="form-group">
 
-                <button onclick="hideCarStuff()">Hide car make and model</button>
+                <button onclick="hideCarStuff()">Toggle between specific car and default</button>
 
                 <div id="mycardiv" style.display = "none" >
 
