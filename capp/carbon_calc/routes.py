@@ -12,7 +12,7 @@ efco2={'Bus':{'Diesel':0.105,'Electric':0.03052,'Hybrid':0.054},
     'Car':{'Gasoline':0.0384,'Diesel':0.0343,'Hybrid':0.0298,'Electric':0.0106,'Hydrogen':0},
     'Plane':{'Short-haul(Buisness)':0.147, 'Long-haul(Economy)': 0.235, 'Long-haul(Premium economy)': 0.427, 'Long-haul(First-class)': 0.558, 'International(Economy)': 0.140, 'International (Premium economy)': 0.229, 'International (Buisness)': 0.406, 'International (First Class)': 0.560},
     'Ferry':{'Regular':0.226, 'High-speed':0.452},
-    'Train':{'Diesel':0.091, 'Electric (Nordic)':0.024, 'Electric (EU)': 0.007},
+    'Train':{'Diesel':0.091, 'Electric(Nordic)':0.024, 'Electric(EU)': 0.007},
     'Motorbike':{'≤125cc':0.0415,'125cc to 500cc':0.0505, '>500cc':0.0665,},
     'Bicycle':{'No Fossil Fuel':0},
     'Walk':{'No Fossil Fuel':0}}
@@ -177,6 +177,28 @@ def new_entry_walk():
         return redirect(url_for('carbon_calc.your_data'))
     return render_template('carbon_calc/new_entry_walk.html', title='new entry walk', form=form)
 
+#New entry train
+@carbon_calc.route('/carbon_calc/new_entry_train', methods=['GET','POST'])
+@login_required
+def new_entry_train():
+    form = TrainForm()
+    if form.validate_on_submit():
+        kms = form.kms.data
+        fuel = form.fuel_type.data
+        transport = 'Train'
+     
+
+        co2 = float(kms) * efco2[transport][fuel]
+
+        co2 = float("{:.2f}".format(co2))
+
+        emissions = Transport(kms=kms, transport=transport, fuel=fuel, co2=co2, author=current_user)
+        db.session.add(emissions)
+        db.session.commit()
+        return redirect(url_for('carbon_calc.your_data'))
+    return render_template('carbon_calc/new_entry_train.html', title='new entry train', form=form)
+
+
 #Your data
 @carbon_calc.route('/carbon_calc/your_data')
 @login_required
@@ -195,5 +217,3 @@ def delete_emission(entry_id):
     db.session.commit()
     flash("Entry deleted", "success")
     return redirect(url_for('carbon_calc.your_data'))
-    
-# todo new entry train
