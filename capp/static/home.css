@@ -99,7 +99,6 @@ p {
   align-items: center;
   justify-content: space-between;
 }
-
 .box-items{
   display: flex;
   flex-direction: column;
