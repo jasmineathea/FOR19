@@ -16,7 +16,6 @@ class CarForm(FlaskForm):
     fuel_type = SelectField('Type of Fuel', choices=[('Petrol', 'Petrol'), ('Diesel', 'Diesel'), ('No Fossil Fuel', 'No Fossil Fuel')], validators=[InputRequired()])
     submit = SubmitField('Submit')
 
-
 class PlaneForm(FlaskForm):
   kms = FloatField('Kilometers', [InputRequired()])
   fuel_type = SelectField('Type of Fuel', [InputRequired()], 
