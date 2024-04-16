@@ -64,97 +64,56 @@
     <section class="section_padding">
         <h1 class="main-intro-text">Please select a mode of transportation:</h1>
 
-       <!-- carbon_calc_new_entry_main -->
-    <section class="section_carbon_calc_new_entry_main">
-        <div class="container">
-      
-      
-          <div class="carbon_calc_new_entry_main">
-              <div class="box">
-                <div class="h1 mb-3" style="text-align: center;">
-                    <i class="fa-solid fa-bus"></i>
+        <div class="transport-selection-container">
+            <a class="transport-item" href="{{url_for('carbon_calc.new_entry_car')}}">
+                <div class="transport-img-container">
+                    <img src="/static/icons/transport-icons/car.avif">
                 </div>
-                <h3>Bus</h3>
-                <p>Please, enter your kilometers by using the bus.
-                </p>
-                <div class="section_container_buttons_carbon_calc_new_entry_main">
-                  <a class="btn_carbon_calc_new_entry_main" href="{{url_for('carbon_calc.new_entry_bus')}}">New Entry</a>
-                </div> 
-              </div>
-              <div class="box">
-                <div class="h1 mb-3" style="text-align: center;">
-                    <i class="fa-solid fa-car"></i>
+                <div class="transport-item-title">
+                    <h3>Car</h3>
                 </div>
-                <h3>Car</h3>
-                <p>Please, enter your kilometers by using the car.
-                </p>
-                <div class="section_container_buttons_carbon_calc_new_entry_main">
-                  <a class="btn_carbon_calc_new_entry_main" href="{{url_for('carbon_calc.new_entry_car')}}">New Entry</a>
-                </div> 
-              </div>           
-              <div class="box">
-                <div class="h1 mb-3" style="text-align: center;">
-                    <i class="fa-solid fa-plane"></i>
+            </a>
+            <a class="transport-item" href="{{url_for('carbon_calc.new_entry_bus')}}">
+                <div class="transport-img-container">
+                    <img src="https://i.postimg.cc/XYRKq6yw/bus.jpg">
                 </div>
-                <h3>Plane</h3>
-                <p>Please, enter your kilometers by using the plane.
-                </p>
-                <div class="section_container_buttons_carbon_calc_new_entry_main">
-                  <a class="btn_carbon_calc_new_entry_main" href="{{url_for('carbon_calc.new_entry_plane')}}">New Entry</a>
-                </div> 
-              </div>
-              <div class="box">
-                <div class="h1 mb-3" style="text-align: center;">
-                    <i class="fa-solid fa-ship"></i>
+                <div class="transport-item-title">
+                    <h3>Bus</h3>
                 </div>
-                <h3>Ferry</h3>
-                <p>Please, enter your kilometers by using the ferry.
-                </p>
-                <div class="section_container_buttons_carbon_calc_new_entry_main">
-                  <a class="btn_carbon_calc_new_entry_main" href="{{url_for('carbon_calc.new_entry_ferry')}}">New Entry</a>
-                </div> 
-              </div>      
-          </div>
-    
-          <div class="carbon_calc_new_entry_main">
-            <div class="box">
-              <div class="h1 mb-3" style="text-align: center;">
-                <i class="fa-solid fa-motorcycle"></i>
-              </div>
-              <h3>Motorbike</h3>
-              <p>Please, enter your kilometers by using the motocycle.
-              </p>
-              <div class="section_container_buttons_carbon_calc_new_entry_main">
-                <a class="btn_carbon_calc_new_entry_main" href="{{url_for('carbon_calc.new_entry_motorbike')}}">New Entry</a>
-              </div> 
-            </div>    
-            <div class="box">
-              <div class="h1 mb-3" style="text-align: center;">
-                <i class="fa-solid fa-bicycle"></i>
-              </div>
-              <h3>Bicycle</h3>
-              <p>Please, enter your kilometers by using the bicycle.
-              </p>
-              <div class="section_container_buttons_carbon_calc_new_entry_main">
-                <a class="btn_carbon_calc_new_entry_main" href="{{url_for('carbon_calc.new_entry_bicycle')}}">New Entry</a>
-              </div> 
-            </div>
-            <div class="box">
-              <div class="h1 mb-3" style="text-align: center;">
-                <i class="fa-solid fa-person-walking"></i>
-              </div>
-              <h3>Walk</h3>
-              <p>Please, enter your kilometers by walking.
-              </p>
-              <div class="section_container_buttons_carbon_calc_new_entry_main">
-                <a class="btn_carbon_calc_new_entry_main" href="{{url_for('carbon_calc.new_entry_walk')}}">New Entry</a>
-              </div> 
-            </div> 
-            <div class="box" style="background-color:#c5c8d9;">
-            </div>      
+            </a>
+            <a class="transport-item" href="{{url_for('carbon_calc.new_entry_plane')}}">
+                <div class="transport-img-container">
+                    <img src="https://i.postimg.cc/zfNyRttb/airplane-background.jpg">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Airplane</h3>
+                </div>
+            </a>
+            <a class="transport-item" href="{{url_for('carbon_calc.new_entry_ferry')}}">
+                <div class="transport-img-container">
+                    <img src="https://i.postimg.cc/ZRTwYz1w/ferry.webp">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Ferry</h3>
+                </div>
+            </a>
+            <a class="transport-item" href="{{url_for('carbon_calc.new_entry_walk')}}">
+                <div class="transport-img-container">
+                    <img src="https://i.postimg.cc/SR4Ybm3K/walk.jpg">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Walking</h3>
+                </div>
+            </a>
+            <a class="transport-item" href="{{url_for('carbon_calc.new_entry_bicycle')}}">
+                <div class="transport-img-container">
+                    <img src="https://i.postimg.cc/P5pzd5NX/bike.jpg">
+                </div>
+                <div class="transport-item-title">
+                    <h3>Bike</h3>
+                </div>
+            </a>
         </div>
-      
-        </div>          
     </section>
 
 {% endblock content %}
