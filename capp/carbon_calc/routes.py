@@ -4,7 +4,7 @@ from capp import db
 from datetime import timedelta, datetime
 from flask_login import login_required, current_user
 from capp.carbon_calc.forms import BusForm, CarForm, PlaneForm, FerryForm, TrainForm, MotorbikeForm, BicycleForm, WalkForm
-
+import json
 carbon_calc=Blueprint('carbon_calc',__name__)
 
 #Emissions factor per transport in kg per passemger km
@@ -12,7 +12,7 @@ efco2={'Bus':{'Diesel':0.105,'Electric':0.03052,'Hybrid':0.054},
     'Car':{'Gasoline':0.0384,'Diesel':0.0343,'Hybrid':0.0298,'Electric':0.0106,'Hydrogen':0},
     'Plane':{'Short-haul(Buisness)':0.147, 'Long-haul(Economy)': 0.235, 'Long-haul(Premium economy)': 0.427, 'Long-haul(First-class)': 0.558, 'International(Economy)': 0.140, 'International (Premium economy)': 0.229, 'International (Buisness)': 0.406, 'International (First Class)': 0.560},
     'Ferry':{'Regular':0.226, 'High-speed':0.452},
-    'Train':{'Diesel':0.091, 'Electric(Nordic)':0.024, 'Electric(EU)': 0.007},
+    'Train':{'Diesel':0.091, 'Electric (Nordic)':0.024, 'Electric (EU)': 0.007},
     'Motorbike':{'≤125cc':0.0415,'125cc to 500cc':0.0505, '>500cc':0.0665,},
     'Bicycle':{'No Fossil Fuel':0},
     'Walk':{'No Fossil Fuel':0}}
@@ -133,6 +133,27 @@ def new_entry_motorbike():
         return redirect(url_for('carbon_calc.your_data'))
     return render_template('carbon_calc/new_entry_motorbike.html', title='new entry motorbike', form=form) 
 
+@carbon_calc.route('/carbon_calc/new_entry_train', methods=['GET','POST'])
+@login_required
+def new_entry_tain():
+    form = TrainForm()
+    if form.validate_on_submit():
+        kms = form.kms.data
+        fuel = form.fuel_type.data
+        transport = 'Train'
+        # kms = request.form['kms']
+        # fuel = request.form['fuel_type']
+
+        co2 = float(kms) * efco2[transport][fuel]
+
+        co2 = float("{:.2f}".format(co2))
+
+        emissions = Transport(kms=kms, transport=transport, fuel=fuel, co2=co2, author=current_user)
+        db.session.add(emissions)
+        db.session.commit()
+        return redirect(url_for('carbon_calc.your_data'))
+    return render_template('carbon_calc/new_entry_train.html', title='new entry train', form=form) 
+
 #New entry bicycle
 @carbon_calc.route('/carbon_calc/new_entry_bicycle', methods=['GET','POST'])
 @login_required
@@ -177,28 +198,6 @@ def new_entry_walk():
         return redirect(url_for('carbon_calc.your_data'))
     return render_template('carbon_calc/new_entry_walk.html', title='new entry walk', form=form)
 
-#New entry train
-@carbon_calc.route('/carbon_calc/new_entry_train', methods=['GET','POST'])
-@login_required
-def new_entry_train():
-    form = TrainForm()
-    if form.validate_on_submit():
-        kms = form.kms.data
-        fuel = form.fuel_type.data
-        transport = 'Train'
-     
-
-        co2 = float(kms) * efco2[transport][fuel]
-
-        co2 = float("{:.2f}".format(co2))
-
-        emissions = Transport(kms=kms, transport=transport, fuel=fuel, co2=co2, author=current_user)
-        db.session.add(emissions)
-        db.session.commit()
-        return redirect(url_for('carbon_calc.your_data'))
-    return render_template('carbon_calc/new_entry_train.html', title='new entry train', form=form)
-
-
 #Your data
 @carbon_calc.route('/carbon_calc/your_data')
 @login_required
@@ -207,7 +206,142 @@ def your_data():
     entries = Transport.query.filter_by(author=current_user). \
         filter(Transport.date> (datetime.now() - timedelta(days=5))).\
         order_by(Transport.date.desc()).order_by(Transport.transport.asc()).all()
-    return render_template('carbon_calc/your_data.html', title='your_data', entries=entries)
+    
+    #Emissions by category
+    emissions_by_transport = db.session.query(db.func.sum(Transport.co2), Transport.transport). \
+        filter(Transport.date > (datetime.now() - timedelta(days=5))).filter_by(author=current_user). \
+        group_by(Transport.transport).order_by(Transport.transport.asc()).all()
+    emission_transport = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    first_tuple_elements = []
+    second_tuple_elements = []
+    for a_tuple in emissions_by_transport:
+        first_tuple_elements.append(a_tuple[0])
+        second_tuple_elements.append(a_tuple[1])
+
+    if 'Bus' in second_tuple_elements:
+        index_bus = second_tuple_elements.index('Bus')
+        emission_transport[1]=first_tuple_elements[index_bus]
+    else:
+        emission_transport[1]
+
+    if 'Car' in second_tuple_elements:
+        index_car = second_tuple_elements.index('Car')
+        emission_transport[2]=first_tuple_elements[index_car]
+    else:
+        emission_transport[2]
+
+    if 'Ferry' in second_tuple_elements:
+        index_ferry = second_tuple_elements.index('Ferry')
+        emission_transport[3]=first_tuple_elements[index_ferry]
+    else:
+        emission_transport[3]
+
+    if 'Motorbike' in second_tuple_elements:
+        index_motorbike = second_tuple_elements.index('Motorbike')
+        emission_transport[4]=first_tuple_elements[index_motorbike]
+    else:
+        emission_transport[4]
+
+    if 'Plane' in second_tuple_elements:
+        index_plane = second_tuple_elements.index('Plane')
+        emission_transport[5]=first_tuple_elements[index_plane]
+    else:
+        emission_transport[5]
+
+    if 'Train' in second_tuple_elements:
+        index_train = second_tuple_elements.index('Train')
+        emission_transport[6]=first_tuple_elements[index_train]
+    else:
+        emission_transport[6]
+
+    #Kilometers by category
+    kms_by_transport = db.session.query(db.func.sum(Transport.kms), Transport.transport). \
+        filter(Transport.date > (datetime.now() - timedelta(days=5))).filter_by(author=current_user). \
+        group_by(Transport.transport).order_by(Transport.transport.asc()).all()
+    kms_transport = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    first_tuple_elements = []
+    second_tuple_elements = []
+    for a_tuple in kms_by_transport:
+        first_tuple_elements.append(a_tuple[0])
+        second_tuple_elements.append(a_tuple[1])
+
+    if 'Bicycle' in second_tuple_elements:
+        index_bicycle = second_tuple_elements.index('Bicycle')
+        kms_transport[0]=first_tuple_elements[index_bicycle]
+    else:
+        kms_transport[0] 
+
+    if 'Bus' in second_tuple_elements:
+        index_bus = second_tuple_elements.index('Bus')
+        kms_transport[1]=first_tuple_elements[index_bus]
+    else:
+        kms_transport[1]
+
+    if 'Car' in second_tuple_elements:
+        index_car = second_tuple_elements.index('Car')
+        kms_transport[2]=first_tuple_elements[index_car]
+    else:
+        kms_transport[2]
+
+    if 'Ferry' in second_tuple_elements:
+        index_ferry = second_tuple_elements.index('Ferry')
+        kms_transport[3]=first_tuple_elements[index_ferry]
+    else:
+        kms_transport[3]
+
+    if 'Motorbike' in second_tuple_elements:
+        index_motorbike = second_tuple_elements.index('Motorbike')
+        kms_transport[4]=first_tuple_elements[index_motorbike]
+    else:
+        kms_transport[4]
+
+    if 'Plane' in second_tuple_elements:
+        index_plane = second_tuple_elements.index('Plane')
+        kms_transport[5]=first_tuple_elements[index_plane]
+    else:
+        kms_transport[5]
+
+    if 'Train' in second_tuple_elements:
+        index_train = second_tuple_elements.index('Train')
+        kms_transport[6]=first_tuple_elements[index_train]
+    else:
+        kms_transport[6]     
+
+    if 'Walk' in second_tuple_elements:
+        index_walk = second_tuple_elements.index('Walk')
+        kms_transport[7]=first_tuple_elements[index_walk]
+    else:
+        kms_transport[7]    
+
+    #Emissions by date (individual)
+    emissions_by_date = db.session.query(db.func.sum(Transport.co2), Transport.date). \
+        filter(Transport.date > (datetime.now() - timedelta(days=5))).filter_by(author=current_user). \
+        group_by(Transport.date).order_by(Transport.date.asc()).all()
+    over_time_emissions = []
+    dates_label = []
+    for total, date in emissions_by_date:
+        dates_label.append(date.strftime("%m-%d-%y"))
+        over_time_emissions.append(total)    
+
+    #Kms by date (individual)
+    kms_by_date = db.session.query(db.func.sum(Transport.kms), Transport.date). \
+        filter(Transport.date > (datetime.now() - timedelta(days=5))).filter_by(author=current_user). \
+        group_by(Transport.date).order_by(Transport.date.asc()).all()
+    over_time_kms = []
+    dates_label = []
+    for total, date in kms_by_date:
+        dates_label.append(date.strftime("%m-%d-%y"))
+        over_time_kms.append(total)      
+
+
+    return render_template('carbon_calc/your_data.html', title='your_data', entries=entries,
+        emissions_by_transport_python_dic=emissions_by_transport,     
+        emission_transport_python_list=emission_transport,             
+        emissions_by_transport=json.dumps(emission_transport),
+        kms_by_transport=json.dumps(kms_transport),
+        over_time_emissions=json.dumps(over_time_emissions),
+        over_time_kms=json.dumps(over_time_kms),
+        dates_label=json.dumps(dates_label))
 
 #Delete emission
 @carbon_calc.route('/carbon_calc/delete-emission/<int:entry_id>')
@@ -217,3 +351,5 @@ def delete_emission(entry_id):
     db.session.commit()
     flash("Entry deleted", "success")
     return redirect(url_for('carbon_calc.your_data'))
+    
+# todo new entry train
