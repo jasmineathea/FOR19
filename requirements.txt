@@ -33,3 +33,4 @@ virtualenv==20.16.7
 virtualenv-clone==0.5.7
 Werkzeug==2.2.2
 WTForms==3.0.1
+requests==2.31.0
