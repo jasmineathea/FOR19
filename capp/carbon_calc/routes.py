@@ -3,7 +3,7 @@ from capp.models import Transport
 from capp import db
 from datetime import timedelta, datetime
 from flask_login import login_required, current_user
-from capp.carbon_calc.forms import BusForm, CarForm, PlaneForm, FerryForm, MotorbikeForm, BicycleForm, WalkForm
+from capp.carbon_calc.forms import BusForm, CarForm, PlaneForm, FerryForm, TrainForm, MotorbikeForm, BicycleForm, WalkForm
 
 carbon_calc=Blueprint('carbon_calc',__name__)
 
@@ -196,3 +196,4 @@ def delete_emission(entry_id):
     flash("Entry deleted", "success")
     return redirect(url_for('carbon_calc.your_data'))
     
+# todo new entry train

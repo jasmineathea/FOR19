@@ -11,4 +11,6 @@ NHH | Spring 2024
 * Jasmine Athea Næss
 * Klara Evelina Palkint ​​
 
+test
+
 ### Known bugs after latest commit:
