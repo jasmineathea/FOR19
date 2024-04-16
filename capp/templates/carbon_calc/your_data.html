@@ -1,151 +1,234 @@
-<!DOCTYPE html>
-<html>
-    <head>
-      <!-- Font Awesome code -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% extends "layout.html" %}
+{% block content %}
 
-      <!--Import the Bootstrap CSS file:-->
-      <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-      crossorigin="anonymous"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-      />
+    <!-- New Entry Section -->
+    <section class="main_menu">
+      <div class="container">
+          <div class="box">
 
-      <!-- Matjax -->
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-      
-      <!-- CSS code -->
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='methodology.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='carbon_calc.css') }}">
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='forms.css') }}">
-
-
-      <!-- To activate media queries in devices -->
-      <meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1">
-
-      <!--For the plots-->
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-      <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-
-        {% if title %}
-            <title>{{ title }}</title>
-        {% else %}
-            <title>home</title>
-        {% endif %}
-        
-    </head>
-    <body>
-        <section class="section_carbon_calc_navbar">
-          <div class="container">
-            <div class="carbon_calc_navbar">
-              <h1 class="logo">
-                <small>
-                  <a href="{{ url_for('home.home_home') }}" class="logo-link">
-                    <span class="text-logo">M<i class="fa-solid fa-earth-americas"></i>VE GREEN</span>
-                  </a>
-                </small>
-              </h1>
-              {% if current_user.is_authenticated %}
-              <nav>
-                <ul style="list-style: none;">
-                    <li>
-                      <a href="{{url_for('methodology.methodology_home')}}"><i class="fa-solid fa-book"></i> Methodology</a>
-                    </li>
-                    <li>
-                      <a href="{{url_for('carbon_calc.carbon_calc_home')}}"><i class="fa-solid fa-calculator"></i> Carbon Calculator</a>
-                    </li>
-                    <li>
-                      <a href="{{url_for('users.logout')}}"><i class="fa-solid fa-circle-user"></i> Log out</a>
-                    </li>
-                </ul>
-              </nav> 
-              {% else %}
-              <nav>
-                <ul style="list-style: none;">
-                    <li>
-                      <a href="{{url_for('methodology.methodology_home')}}"><i class="fa-solid fa-book"></i> Methodology</a>
-                    </li>
-                    <li>
-                      <a href="{{url_for('carbon_calc.carbon_calc_home')}}"><i class="fa-solid fa-calculator"></i> Carbon Calculator</a>
-                    </li>
-                    <li>
-                      <a href="{{url_for('users.login')}}"><i class="fa-solid fa-circle-user"></i> Log in</a>
-                    </li>
-                </ul>
-              </nav> 
-              {% endif %}
-            </div>
           </div>
-        </section>
+          <div class="box"> 
+              <div class="container_buttons_links_main_menu">
+                  <div class="btn">
+                      <a href="{{ url_for('carbon_calc.carbon_calc_home') }}" class="btn_carbon_calc_new_entry_main">New Entry</a>
+                  </div>   
+              </div>        
+          </div>
+          <div class="box">
 
-        <!-- Added content wrapper to push the footer to the bottom of the screen,
-        if the content is "too short" to fill the entire screen -->
-        <div class="content-wrapper">
-          {% block content %} {% endblock %}
+          </div>
+      </div>
+    </section> 
+
+     <!-- Table Section -->
+     <section class="table_main">
+        <div class="container">
+            <div class="box">
+    
+            </div>
+            <div class="box">  
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div> 
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}         
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Kilometres</th>
+                            <th scope="col">Transport</th>
+                            <th scope="col">Fuel</th>
+                            <th scope="col">Co2</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries %}
+                            <tr>
+                                <th scope="row">{{ current_user.username }}</th>
+                                <td>{{ entry.date.strftime("%m-%d-%Y") }}</td>
+                                <td>{{ entry.kms }}</td>
+                                <td>{{ entry.transport }}</td>
+                                <td>{{ entry.fuel }}</td>
+                                <td>{{ entry.co2 }}</td>
+                                <td><a href="{{ url_for('carbon_calc.delete_emission', entry_id = entry.id) }}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>       
+            </div>
+            <div class="box">
+    
+            </div>
         </div>
+        </section> 
 
-        <!-- Footer -->
-          <div class="footer-wave">
-            <svg class="footer-wave-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100" preserveAspectRatio="none">
-              <path class="footer-wave-path" d="M851.8,100c125,0,288.3-45,348.2-64V0H0v44c3.7-1,7.3-1.9,11-2.9C80.7,22,151.7,10.8,223.5,6.3C276.7,2.9,330,4,383,9.8 c52.2,5.7,103.3,16.2,153.4,32.8C623.9,71.3,726.8,100,851.8,100z"></path>
-            </svg>
-            <ul class="social-icon">
-              <li class="social-icon__item"><a class="fa-brands fa-instagram" href="https://www.instagram.com/movegreen2024/">
-                  </a></li>
-              <li class="social-icon__item"><a class="fa-solid fa-circle-up" href="#">
-                </a></li>
-            </ul>
-            <ul class="menu">
-              <li class="menu__item"><i class="fa-regular fa-envelope"></i> support@movegreen.com </a>
-              </li>
-              <li class="menu__item"><i class="fa-solid fa-phone"></i> +47 123 45 678 </a>
-              </li>
-              <li class="menu__item"><i class="fa-solid fa-location-dot"></i> Helleveien 30, 5045 Bergen, Norway </a>
-              </li>
-            </ul>
-            <ul class="menu">
-              <li class="menu__item"><a class="menu__link" href="{{url_for('methodology.methodology_home')}}"> Methodology </a>
-              </li>
-              <li class="menu__item"><a class="menu__link" <a href="{{url_for('carbon_calc.carbon_calc_home')}}"> Carbon Calculator </a>
-              </li>
-              <li class="menu__item"><a class="menu__link" href="{{url_for('users.login')}}"> Log in </a>
-              </li>
-              <li class="menu__item"><a class="menu__link" href="{{url_for('users.register')}}"> Register </a>
-              </li>
-            </ul>
-            <section class="section_footer">
-              <div class="footer">
-                <p>
-                  MOVE GREEN™ | Group 1 NHH, spring 2024
-                </p>
-              </div>
+    <!-- Two Emissions Graph Section -->
+    <section class="two_emissions_graphs">
+        <div class="container">
+            <div class="box">
+                <canvas id="emissions_by_transport"></canvas>
             </div>
-          </div>
-      </section>
+            <div class="box">
+                <canvas id="over_time_emissions"></canvas> 
+            </div>
+        </div>
+    </section> 
 
-        <!-- Bootstrap -->
-        <!-- Question Accordion -->
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-          crossorigin="anonymous"
-        ></script>
+    <!-- Two Emissions Graph Section -->
+    <section class="two_emissions_graphs">
+        <div class="container">
+            <div class="box">
+                <canvas id="kms_by_transport"></canvas>
+            </div>
+            <div class="box">
+                <canvas id="over_time_kms"></canvas>
+            </div>
+        </div>
+    </section> 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        
-    </body>
-</html>
 
+
+    {% block javascript %}
+    <script>
+        // Emissions
+        let emission_transport_data = JSON.parse({{ emissions_by_transport | tojson }})  
+        Chart.scaleService.updateScaleDefaults('linear', {
+                ticks: {
+                    min: 0
+                }
+        });
+    
+    
+        let emissions_by_transport_chart = new Chart(emissions_by_transport, {
+                type: 'pie',
+                data: {
+                labels: ['Bicycle', 'Bus', 'Car', 'Ferry','Train', 'Plane','Motorbike', 'Walk'],
+                    datasets: [{
+                        data: emission_transport_data,
+                        backgroundColor: ['#9ac2be', '#f2e3b6','#f7e3b6', '#f2c299',
+                            '#f2935c', '#5fd9cd', '#f2d95c', '#f2b84b', '#f27979' ],
+    
+                        borderWidth: 1,
+                        hoverBorderColor: "black",
+                        hoverBorderWidth: 2,
+                        hoverBackgroundColor: 'rgba(100, 100, 100)',
+                        pointHoverRadius: 5
+                    }],
+                },
+                options: {
+                        title: {
+                            display: true,
+                                text: "Emissions by type of transport (5 last days)",
+                                    fontColor: "black",
+                                    fontSize: 20,
+                        },
+                        legend: {
+                            position: "right",
+                                labels: {
+                                fontColor: "black"
+                            },
+                            display: true,
+                        },
+    
+                        elements: {
+                            hitRadius: 3,
+                        }
+                }
+            })
+
+        over_time_emissions = JSON.parse({{over_time_emissions | tojson}})
+        labels = JSON.parse({{ dates_label  | tojson}})
+
+        new Chart(document.getElementById("over_time_emissions"), {
+                type: "line",
+                data:
+                {
+                    labels: labels,
+                    datasets: [
+                        {
+                        label: "Individual Emissions (5 past days)",                           
+                        data: over_time_emissions,
+                        fill: false,
+                        borderColor: '#5fd9cd',
+                        lineTension: 0.1
+                        }
+                ]
+                },                    
+                options: {}
+            });  
+            
+        // Kilometers
+        let kms_transport_data = JSON.parse({{ kms_by_transport | tojson }})    
+        Chart.scaleService.updateScaleDefaults('linear', {
+                ticks: {
+                    min: 0
+                }
+        });
+        let kms_by_transport_chart = new Chart(kms_by_transport, {
+                type: 'pie',
+                data: {
+                labels: ['Bicycle', 'Bus', 'Car', 'Ferry','Train', 'Plane','Motorbike', 'Walk'],
+                    datasets: [{
+                        label: "Income Vs Expenses",
+                        data: kms_transport_data,
+                        backgroundColor: ['#9ac2be', '#f2e3b6','#f2e3b6', '#f2c299',
+                            '#f2935c', '#5fd9cd', '#f2d95c', '#f2b84b', '#f27979' ],    
+                        borderWidth: 1,
+                        hoverBorderColor: "black",
+                        hoverBorderWidth: 2,
+                        hoverBackgroundColor: 'rgba(100, 100, 100)',
+                        pointHoverRadius: 5
+                    }],
+                },
+                options: {
+                        title: {
+                            display: true,
+                                text: "Kilometers by type of transport (5 last days)",
+                                fontColor: "black",
+                                fontSize: 20,
+                        },
+                        legend: {
+                            position: "right",
+                                labels: {
+                                fontColor: "black"
+                            },
+                            display: true,
+                        },
+    
+                        elements: {
+                            hitRadius: 3,
+                        }
+                }
+            })
+            
+        over_time_kms = JSON.parse({{over_time_kms | tojson}})
+        labels = JSON.parse({{ dates_label  | tojson}})
+
+        new Chart(document.getElementById("over_time_kms"), {
+                type: "line",
+                data:
+                {
+                    labels: labels,
+                    datasets: [
+                        {
+                        label: "Individual Kilometers (5 past days)",                            
+                        data: over_time_kms,
+                        fill: false,
+                        borderColor: '#f2d95c',
+                        lineTension: 0.1
+                        }
+                ]
+                },                    
+                options: {}
+            });   
+
+        </script>
+    {% endblock%}        
+{% endblock content %}
