@@ -1,4 +1,5 @@
 import requests
+import json
 
 url = 'https://www.carboninterface.com/api'
 headers = {'Authorization': 'Bearer Q6eGoxxENeS3vpIoXkKOw'}
@@ -26,10 +27,20 @@ class CarbonAPI:
         return req.json()
     
     def getVehicleMake(self, id):
-        if (id == None):
+        if id is None:
             print("ID is required")
 
         req = requests.get(url + "/v1/vehicle_makes/" + id + "/vehicle_models", headers=headers)
-            ### Push all vehicle makes names to all_vehicle_makes
+        vehicle_models = req.json()
 
-        return req.json()
+        unique_models = {}
+
+        for model in vehicle_models:
+            name = model["data"]["attributes"]["name"]
+            year = model["data"]["attributes"]["year"]
+            if name not in unique_models or unique_models[name]["year"] < year:
+                unique_models[name] = {"year": year, "model": model}
+
+        unique_vehicle_models = [model["model"] for model in unique_models.values()]
+
+        return unique_vehicle_models
