@@ -5,11 +5,6 @@ url = 'https://www.carboninterface.com/api'
 headers = {'Authorization': 'Bearer Q6eGoxxENeS3vpIoXkKOw'}
 
 
-""" toyota = "2b1d0cd5-59be-4010-83b3-b60c5e5342da"
-
-all_vehicle_makes = [] """
-
-
 class CarbonAPI:
     def __init__(self):
         req = requests.get(url + "/v1/auth", headers=headers)
