@@ -1,15 +1,19 @@
-from flask import render_template, Blueprint, request, redirect, url_for, flash
+from flask import render_template, Blueprint, request, redirect, url_for, flash, jsonify
 from capp.models import Transport
 from capp import db
 from datetime import timedelta, datetime
 from flask_login import login_required, current_user
-from capp.carbon_calc.forms import BusForm, CarForm, PlaneForm, FerryForm, TrainForm, MotorbikeForm, BicycleForm, WalkForm
+from capp.carbon_calc.forms import BusForm, CarForm, PlaneForm, FerryForm, TrainForm, MotorbikeForm, BicycleForm, WalkForm, SpecificCarForm
+from capp.carbon_interface.api import CarbonAPI
+
 
 carbon_calc=Blueprint('carbon_calc',__name__)
 
+api = CarbonAPI()
+
 #Emissions factor per transport in kg per passemger km
 efco2={'Bus':{'Diesel':0.105,'Electric':0.03052,'Hybrid':0.054},
-    'Car':{'Gasoline':0.0384,'Diesel':0.0343,'Hybrid':0.0298,'Electric':0.0106,'Hydrogen':0},
+    'Car':{'Petrol':0.0384,'Diesel':0.0343,'Hybrid':0.0298,'Electric':0.0106,'Hydrogen':0},
     'Plane':{'Short-haul(Buisness)':0.147, 'Long-haul(Economy)': 0.235, 'Long-haul(Premium economy)': 0.427, 'Long-haul(First-class)': 0.558, 'International(Economy)': 0.140, 'International (Premium economy)': 0.229, 'International (Buisness)': 0.406, 'International (First Class)': 0.560},
     'Ferry':{'Regular':0.226, 'High-speed':0.452},
     'Train':{'Diesel':0.091, 'Electric (Nordic)':0.024, 'Electric (EU)': 0.007},
@@ -65,7 +69,28 @@ def new_entry_car():
         db.session.add(emissions)
         db.session.commit()
         return redirect(url_for('carbon_calc.your_data'))
-    return render_template('carbon_calc/new_entry_car.html', title='new entry car', form=form)    
+    return render_template('carbon_calc/new_entry_car.html', title='new entry car', form=form)
+
+#New entry specific car
+@carbon_calc.route('/carbon_calc/new_entry_specific_car', methods=['GET','POST'])
+@login_required
+def new_entry_specific_car():
+    form = SpecificCarForm()
+    if form.validate_on_submit():
+        kms = form.kms.data
+        model = form.model.data
+        transport = "Specified Car"
+        fuel = "N/A"
+        
+        estimate = api.getEstimate(id=model, distance=kms)
+        co2 = estimate["data"]["attributes"]["carbon_kg"]
+        co2 = int(co2)/4
+    
+        emissions = Transport(kms=kms, transport=transport, fuel=fuel, co2=co2, author=current_user)
+        db.session.add(emissions)
+        db.session.commit()
+        return redirect(url_for('carbon_calc.your_data'))
+    return render_template('carbon_calc/new_entry_specific_car.html', title='new entry specific car', form=form)
 
 #New entry plane
 @carbon_calc.route('/carbon_calc/new_entry_plane', methods=['GET','POST'])
