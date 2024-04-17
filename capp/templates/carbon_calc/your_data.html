@@ -109,11 +109,11 @@
         let emissions_by_transport_chart = new Chart(emissions_by_transport, {
                 type: 'pie',
                 data: {
-                labels: ['Bicycle', 'Bus', 'Car', 'Ferry','Train', 'Plane','Motorbike', 'Walk'],
+                labels: ['Bus', 'Car', 'Ferry','Motorbike','Plane', 'Train'],
                     datasets: [{
                         data: emission_transport_data,
-                        backgroundColor: ['#9ac2be', '#f2e3b6','#f7e3b6', '#f2c299',
-                            '#f2935c', '#5fd9cd', '#f2d95c', '#f2b84b', '#f27979' ],
+                        backgroundColor: ['#9ac2be', '#f2e3b6', '#f2c299',
+                            '#f2935c', '#5fd9cd', '#f2d95c'],
     
                         borderWidth: 1,
                         hoverBorderColor: "black",
@@ -174,7 +174,7 @@
         let kms_by_transport_chart = new Chart(kms_by_transport, {
                 type: 'pie',
                 data: {
-                labels: ['Bicycle', 'Bus', 'Car', 'Ferry','Train', 'Plane','Motorbike', 'Walk'],
+                labels: ['Bicycle', 'Bus', 'Car', 'Ferry','Moterbike', 'Plane','Train', 'Walk'],
                     datasets: [{
                         label: "Income Vs Expenses",
                         data: kms_transport_data,
