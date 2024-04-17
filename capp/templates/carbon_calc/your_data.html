@@ -61,7 +61,7 @@
                                 <td>{{ entry.transport }}</td>
                                 <td>{{ entry.fuel }}</td>
                                 <td>{{ entry.co2 }}</td>
-                                <td><a href="{{ url_for('carbon_calc.delete_emission', entry_id = entry.id) }}" class="btn btn-outline-danger btn-sm">Delete</a></td>
+                                <td><a href="{{ url_for('carbon_calc.delete_emission', entry_id = entry.id) }}" class="btn btn_delete">Delete</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
