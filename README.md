@@ -10,9 +10,3 @@ NHH | Spring 2024
 * Herman Wilter
 * Jasmine Athea Næss
 * Klara Evelina Palkint ​​
-
-test
-
-### To-do
-- Fix the final things for the API integration
-

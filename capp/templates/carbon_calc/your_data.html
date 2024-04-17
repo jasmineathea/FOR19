@@ -1,30 +1,34 @@
 {% extends "layout.html" %}
 {% block content %}
 
-    <!-- New Entry Section -->
-    <section class="main_menu">
-      <div class="container" >
-          <div class="box">
-
-          </div>
-          <div class="box"> 
-              <div class="container_buttons_links_main_menu">
-                  <div class="btn">
-                      <a href="{{ url_for('carbon_calc.carbon_calc_home') }}" class="btn_carbon_calc_new_entry_main">New Entry</a>
-                  </div>   
-              </div>        
-          </div>
-          <div class="box">
-
-          </div>
-      </div>
-    </section> 
+<!-- Header -->
+<section class="section_header_carbon_calc">
+    <div class="container">
+        <div class="header_carbon_calc">
+            <div class="box"> 
+                <h1 class="page-title">Your emissions</h1>
+                <p>
+                    Here are your carbon emissions (in kg) based on your entries in the carbon calculator!
+                </p>
+                <div class="container_buttons">
+                    <a href="{{ url_for('carbon_calc.carbon_calc_home') }}" class="btn btn_header">New Entry</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-wave">
+        <svg class="header-wave-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100" preserveAspectRatio="none">
+            <path class="header-wave-path" d="M851.8,100c125,0,288.3-45,348.2-64V0H0v44c3.7-1,7.3-1.9,11-2.9C80.7,22,151.7,10.8,223.5,6.3C276.7,2.9,330,4,383,9.8 c52.2,5.7,103.3,16.2,153.4,32.8C623.9,71.3,726.8,100,851.8,100z"></path>
+        </svg>
+    </div>
+</section>
 
      <!-- Table Section -->
+    <section class="section_padding">
      <section class="table_main">
-        <div class="container" >
+        <div class="container">
+            </br>
             <div class="box">
-    
             </div>
             <div class="box">  
                 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -92,10 +96,11 @@
             </div>
         </div>
     </section> 
+</section>
 
 
 
-    {% block javascript %}
+{% block javascript %}
     <script>
         // Emissions
         let emission_transport_data = JSON.parse({{ emissions_by_transport | tojson }})  
