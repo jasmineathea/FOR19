@@ -1,0 +1,171 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<script type="module">
+  const res = await fetch("http://127.0.0.1:5000/carbon_interface/cars")
+
+  const body = await res.json()
+
+  // find form-group with id cars
+  const cars = document.getElementById("cars")
+
+  body.sort((a, b) => {
+    if (a.data.attributes.name < b.data.attributes.name) {
+      return -1
+    }
+    if (a.data.attributes.name > b.data.attributes.name) {
+      return 1
+    }
+    return 0
+  })
+
+// Add the options to the id cars
+body.forEach((element) => {
+    const option = document.createElement("option")
+    option.value = element.data.id
+    option.text = element.data.attributes.name
+    cars.appendChild(option)
+  })
+
+
+  const makes = document.getElementById("models")
+  const realModel = document.getElementById("model")
+
+  const getMake = async (id) => {
+    const resMake = await fetch(`http://127.0.0.1:5000/carbon_interface/models/${id}`)
+    const makeBody = resMake.json()
+
+    return makeBody
+  }
+
+  cars.addEventListener("change", async (event) => {
+  const value = event.target.value;
+  const makes = await getMake(value)
+  makes.sort((a, b) => {
+    if (a.data.attributes.name < b.data.attributes.name) {
+      return -1
+    }
+    if (a.data.attributes.name > b.data.attributes.name) {
+      return 1
+    }
+    return 0
+  })
+
+  // Remove all existing options from the models select element
+  while (models.firstChild) {
+    models.removeChild(models.firstChild);
+  }
+
+  makes.forEach((element) => {
+    const option = document.createElement("option")
+    option.value = element.data.id
+    option.text = element.data.attributes.name
+    models.appendChild(option)
+  })
+
+})
+
+
+makes.addEventListener("click", (e) => {
+
+const id = e.target.value;
+
+  realModel.value = id;
+})
+
+</script>
+
+<section class="new_entry">
+  <div class="container">
+      <div class="box">
+
+      </div>
+      <div class="box">   
+        <div class="h1 mb-3" style="text-align: center;">
+          <i class="fa-solid fa-car"></i>
+        </div>
+        <h3>Specific Car Model</h3>
+        <p>
+          <ol style="text-align: left;">
+            <li>
+              Please, choose car make.
+            </li>
+            <li>
+              Please, select car model.
+            </li>
+            <li>
+                Please, enter the number of kilometers.
+            </li>
+          </ol>
+        </p>
+        <div class="box">
+          <!-- This is the clickable box -->
+          <a href="{{url_for('carbon_calc.new_entry_car')}}" class="clickable-box">
+            Or click here to calculate for a generic car
+          </a>
+        </div>
+          <form method="POST" action="">
+              {{ form.csrf_token }}
+              <fieldset class="form-group">
+
+                <div class="form-group">
+                  <label class="form-control-label" for="car">
+                    Car Makes
+                  </label>
+                  <select id="cars" class="form-control form-control-lg">
+
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-control-label" for="model">
+                    Car Models
+                  </label>
+                  <select id="models" class="form-control form-control-lg">
+
+                  </select>
+                </div>
+
+
+
+                <div class="form-group">
+                    {{ form.kms.label(class="form-control-label") }}
+                    {% if form.kms.errors %}
+                        {{ form.kms(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.kms.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.kms(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group" style="display: none;">
+                  {{ form.model.label(class="form-control-label") }}
+                  {% if form.model.errors %}
+                      {{ form.model(class="form-control form-control-lg is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.model.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.model(class="form-control form-control-lg") }}
+                  {% endif %}
+              </div>
+              </fieldset>
+              </br>
+              <div class="form-group">
+                {{ form.submit(class="btn_carbon_app_new_entry_main") }}
+              </div>
+          </form>
+      </div>
+      <div class="box">
+
+      </div>
+  </div>
+</section> 
+
+        
+{% endblock content %}
