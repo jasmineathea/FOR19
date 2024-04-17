@@ -51,6 +51,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  background: #d8cdc3;
 }
 .section_padding {
   flex-grow: 1;
