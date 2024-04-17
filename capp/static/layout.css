@@ -250,6 +250,20 @@ body {
   text-decoration: none;
 }
 
+.btn_close {
+  padding: 5px 5px;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 18px;
+  background-color: #695747;
+}
+.btn_close:hover {
+  background-color: #897768;
+  color: #d8cdc3;
+  text-decoration: none;
+}
+
 /* Media query */
 @media(max-width:768px){
   .carbon_calc_navbar {
