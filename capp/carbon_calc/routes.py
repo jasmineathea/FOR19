@@ -220,39 +220,39 @@ def your_data():
 
     if 'Bus' in second_tuple_elements:
         index_bus = second_tuple_elements.index('Bus')
-        emission_transport[1]=first_tuple_elements[index_bus]
+        emission_transport[0]=first_tuple_elements[index_bus]
     else:
-        emission_transport[1]
+        emission_transport[0]
 
     if 'Car' in second_tuple_elements:
         index_car = second_tuple_elements.index('Car')
-        emission_transport[2]=first_tuple_elements[index_car]
+        emission_transport[1]=first_tuple_elements[index_car]
     else:
-        emission_transport[2]
+        emission_transport[1]
 
     if 'Ferry' in second_tuple_elements:
         index_ferry = second_tuple_elements.index('Ferry')
-        emission_transport[3]=first_tuple_elements[index_ferry]
+        emission_transport[2]=first_tuple_elements[index_ferry]
     else:
-        emission_transport[3]
+        emission_transport[2]
 
     if 'Motorbike' in second_tuple_elements:
         index_motorbike = second_tuple_elements.index('Motorbike')
-        emission_transport[4]=first_tuple_elements[index_motorbike]
+        emission_transport[3]=first_tuple_elements[index_motorbike]
     else:
-        emission_transport[4]
+        emission_transport[3]
 
     if 'Plane' in second_tuple_elements:
         index_plane = second_tuple_elements.index('Plane')
-        emission_transport[5]=first_tuple_elements[index_plane]
+        emission_transport[4]=first_tuple_elements[index_plane]
     else:
-        emission_transport[5]
+        emission_transport[4]
 
     if 'Train' in second_tuple_elements:
         index_train = second_tuple_elements.index('Train')
-        emission_transport[6]=first_tuple_elements[index_train]
+        emission_transport[5]=first_tuple_elements[index_train]
     else:
-        emission_transport[6]
+        emission_transport[5]
 
     #Kilometers by category
     kms_by_transport = db.session.query(db.func.sum(Transport.kms), Transport.transport). \
