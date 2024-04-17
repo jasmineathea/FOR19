@@ -17,7 +17,7 @@
         <form method="POST" action="">
           {{ form.hidden_tag() }}
           <fieldset class="form-group">
-            <h1 class="page-title">Log in here!</h1>
+            <h1 class="page-title">Log in to MoveGreen™</h1>
             <div class="form-group">
               {{ form.email.label(class="form-control-label") }}
               {% if form.email.errors %}
@@ -55,7 +55,6 @@
         </form>
         <p>Need An Account?<a href="{{ url_for('users.register') }}"> Register</a></p>
       </div>
-      <div class="box" style="width: 325px; height: 325px;"></div>
     </div>
   </div>
   <div class="header-wave">
