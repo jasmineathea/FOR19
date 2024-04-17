@@ -135,7 +135,7 @@ def new_entry_motorbike():
 
 @carbon_calc.route('/carbon_calc/new_entry_train', methods=['GET','POST'])
 @login_required
-def new_entry_tain():
+def new_entry_train():
     form = TrainForm()
     if form.validate_on_submit():
         kms = form.kms.data
