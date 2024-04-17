@@ -39,3 +39,19 @@ class CarbonAPI:
         unique_vehicle_models = [model["model"] for model in unique_models.values()]
 
         return unique_vehicle_models
+    
+    def getEstimate(self, id, distance):
+        if id is None:
+            print("ID is required")
+
+        data = {
+            "vehicle_model_id": id,
+            "type": "vehicle",
+            "distance_unit": "km",
+            "distance_value": int(distance)
+        }
+
+        formatedUrl = url + "/v1/estimates"
+
+        req = requests.post(url=formatedUrl, json=data, headers=headers)
+        return req.json()
