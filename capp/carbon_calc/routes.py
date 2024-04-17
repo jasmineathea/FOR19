@@ -67,6 +67,28 @@ def new_entry_car():
         return redirect(url_for('carbon_calc.your_data'))
     return render_template('carbon_calc/new_entry_car.html', title='new entry car', form=form)    
 
+#New entry specific car
+@carbon_calc.route('/carbon_calc/new_entry_specific_car', methods=['GET','POST'])
+@login_required
+def new_entry_specific_car():
+    form = SpecificCarForm()
+    if form.validate_on_submit():
+        kms = form.kms.data
+        model = form.model.data
+        transport = "Specified Car"
+        fuel = "N/A"
+        
+        estimate = api.getEstimate(id=model, distance=kms)
+        co2 = estimate["data"]["attributes"]["carbon_kg"]
+        co2 = int(co2)/4
+    
+        emissions = Transport(kms=kms, transport=transport, fuel=fuel, co2=co2, author=current_user)
+        db.session.add(emissions)
+        db.session.commit()
+        return redirect(url_for('carbon_calc.your_data'))
+    return render_template('carbon_calc/new_entry_specific_car.html', title='new entry specific car', form=form)
+
+
 #New entry plane
 @carbon_calc.route('/carbon_calc/new_entry_plane', methods=['GET','POST'])
 @login_required
