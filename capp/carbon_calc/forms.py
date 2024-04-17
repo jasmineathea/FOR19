@@ -1,25 +1,35 @@
 from flask_wtf import FlaskForm
-from wtforms import  SubmitField, SelectField, FloatField, RadioField
+from wtforms import  SubmitField, SelectField, FloatField, RadioField, StringField
 from wtforms.validators import InputRequired
 
 class BusForm(FlaskForm):
   kms = FloatField('Kilometers', [InputRequired()])
   fuel_type = SelectField('Type of Fuel', [InputRequired()], 
-    choices=[('Diesel', 'Diesel'), ('Electric', 'Electric'), ('Hybrid', 'Hybrid'), ('Hydrogen', 'Hydrogen')])
+    choices=[('Diesel', 'Diesel'), ('Electric', 'Electric'), ('Hybrid', 'Hybrid')])
   submit = SubmitField('Submit')
 
 class CarForm(FlaskForm):
-    selection = RadioField('Car Selection', choices=[('default', 'Default Car'), ('specify', 'Specify Car')], validators=[InputRequired()])
-    car_make = SelectField('Car Make', choices=[], validators=[InputRequired()])
-    car_model = SelectField('Car Model', choices=[], validators=[InputRequired()])
-    kms = FloatField('Kilometers', validators=[InputRequired()])
-    fuel_type = SelectField('Type of Fuel', choices=[('Petrol', 'Petrol'), ('Diesel', 'Diesel'), ('No Fossil Fuel', 'No Fossil Fuel')], validators=[InputRequired()])
-    submit = SubmitField('Submit')
+  kms = FloatField('Kilometers', [InputRequired()])
+  fuel_type = SelectField('Type of Fuel', [InputRequired()], 
+    choices=[('Petrol', 'Petrol'), ('Diesel', 'Diesel'), ('Hybrid', 'Hybrid'), ('Electric', 'Electric'), ('Hydrogen', 'Hydrogen')])
+  submit = SubmitField('Submit')
+
+class SpecificCarForm(FlaskForm):
+  kms = FloatField('Kilometers', [InputRequired()])
+  model = StringField("Model", [InputRequired()])
+  submit = SubmitField('Submit')
 
 class PlaneForm(FlaskForm):
   kms = FloatField('Kilometers', [InputRequired()])
   fuel_type = SelectField('Type of Fuel', [InputRequired()], 
-    choices=[('Short-haul(Buisness)','Short-haul(Buisness)'),('Long-haul(Economy)','Long-haul(Economy)'),('Long-haul(First-class)','Long-haul(First-class)'),('International(Economy)', 'International(Economy)'),('International (Premium economy)','International (Premium economy)'),('International (Buisness)', 'International (Buisness)'),('International (First Class)','International (First Class)')])
+    choices=[('Short-haul(Buisness)','Short-haul(Buisness)'),
+             ('Long-haul(Economy)','Long-haul(Economy)'),
+             ('Long-haul(Premium economy)', 'Long-haul(Premium economy)'),
+             ('Long-haul(First-class)','Long-haul(First-class)'),
+             ('International(Economy)', 'International(Economy)'),
+             ('International (Premium economy)','International (Premium economy)'), 
+             ('International (Buisness)', 'International (Buisness)'),
+             ('International (First Class)','International (First Class)')])
   submit = SubmitField('Submit')
   
 class FerryForm(FlaskForm):
