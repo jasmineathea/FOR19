@@ -51,7 +51,7 @@ class CarbonAPI:
             "distance_value": int(distance)
         }
 
-        formattedUrl = url+"/v1/estimates"
+        formatedUrl = url + "/v1/estimates"
 
-        req = requests.post(url=formattedUrl, json=data, headers=headers)
+        req = requests.post(url=formatedUrl, json=data, headers=headers)
         return req.json()
