@@ -14,9 +14,5 @@ NHH | Spring 2024
 test
 
 ### To-do
-- Change the color of the graphs on yourdata to brown
-- Make it compatible with mobile
 - Fix the final things for the API integration
-- Sort yourdata by category (ex. your emissions) (optional)
-...
 
