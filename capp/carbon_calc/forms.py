@@ -1,5 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import  SubmitField, SelectField, FloatField, StringField
+from wtforms import (SubmitField,
+  SelectField,
+  FloatField, 
+  StringField)
 from wtforms.validators import InputRequired
 
 # Bus form

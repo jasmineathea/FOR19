@@ -181,6 +181,12 @@ p {
   .developers {
     grid-template-columns: repeat(1, 1fr);
   }
+  .box-items2 {
+    flex-direction: column;
+  }
+  .img-container2 {
+    margin: 10px 10px;
+  }
 }
 
 /* 2 developer-columns for medium screens */
