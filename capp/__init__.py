@@ -6,10 +6,13 @@ import os
 
 application = Flask(__name__)
 
-application.config['SECRET_KEY'] = '3oueqkfdfas8ruewqndr8ewrewrouewrere44554'
-DBVAR = f"postgresql://{os.environ['RDS_USERNAME']}:{os.environ['RDS_PASSWORD']}@{os.environ['RDS_HOSTNAME']}/{os.environ['RDS_DB_NAME']}"
-application.config['SQLALCHEMY_DATABASE_URI'] = DBVAR 
-application.config['SQLALCHEMY_BINDS'] ={'transport': DBVAR}
+# application.config['SECRET_KEY'] = '3oueqkfdfas8ruewqndr8ewrewrouewrere44554'
+# application.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
+
+# database-configurations
+application.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///user.db"
+application.config["SQLALCHEMY_BINDS"] = {"transport" : "sqlite:///transport.db"}
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # removes error-message
 db = SQLAlchemy(application)
 
 # encrypting passwords in database
