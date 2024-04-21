@@ -59,7 +59,7 @@ def new_entry_bus():
         # kms = request.form['kms']
         # fuel = request.form['fuel_type']
 
-        co2 = (float(kms) * efco2[transport][fuel]) / 70 # Divided by passenger(s)
+        co2 = (float(kms) * efco2[transport][fuel])
 
         co2 = float("{:.2f}".format(co2))
 
@@ -81,7 +81,7 @@ def new_entry_car():
         # kms = request.form['kms']
         # fuel = request.form['fuel_type']
 
-        co2 = (float(kms) * efco2[transport][fuel]) / 4
+        co2 = (float(kms) * efco2[transport][fuel])
 
         co2 = float("{:.2f}".format(co2))
     
@@ -127,7 +127,7 @@ def new_entry_plane():
         # kms = request.form['kms']
         # fuel = request.form['fuel_type']
 
-        co2 = (float(kms) * efco2[transport][fuel]) / 100 # average amount of passengers (for all types of flights)
+        co2 = (float(kms) * efco2[transport][fuel])
 
         co2 = float("{:.2f}".format(co2))
 
@@ -149,7 +149,7 @@ def new_entry_ferry():
         # kms = request.form['kms']
         # fuel = request.form['fuel_type']
 
-        co2 = (float(kms) * efco2[transport][fuel]) / 309
+        co2 = (float(kms) * efco2[transport][fuel])
 
         co2 = float("{:.2f}".format(co2))
 
